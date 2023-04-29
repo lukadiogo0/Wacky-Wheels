@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour
     //Load scene
     public void Play()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("complete_track_demo");
         //SceneManager.LoadScene("Map1");
     }
 
