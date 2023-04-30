@@ -274,7 +274,7 @@ public class PrometeoCarController : MonoBehaviour
       localVelocityX = transform.InverseTransformDirection(carRigidbody.velocity).x;
       // Save the local velocity of the car in the z axis. Used to know if the car is going forward or backwards.
       localVelocityZ = transform.InverseTransformDirection(carRigidbody.velocity).z;
-       Debug.Log(Mathf.RoundToInt(carSpeed));
+       //Debug.Log(Mathf.RoundToInt(carSpeed));
       //CAR PHYSICS
 
       /*
