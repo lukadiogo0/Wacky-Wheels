@@ -11,9 +11,9 @@ public class ItemBox : MonoBehaviour
 
     private bool canRespawn = true;
 
-    void OnCollisionEnter(Collision collision)
+    void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
             canRespawn = false; // disable respawn flag
             gameObject.GetComponent<MeshRenderer>().enabled = false; // hide the item box

@@ -614,7 +614,7 @@ MonoBehaviour:
   RRWTireSkid: {fileID: 209368441}
   useUI: 0
   carSpeedText: {fileID: 0}
-  useSounds: 1
+  useSounds: 0
   carEngineSound: {fileID: 1750100531}
   tireScreechSound: {fileID: 1750100530}
   useTouchControls: 0
@@ -3010,6 +3010,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!65 &1750100533
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 292507834}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.5995474, y: 2.8705683, z: 6.3976417}
+  m_Center: {x: 0.034914732, y: 0.9352839, z: 0.4689622}
 --- !u!1 &1771704464
 GameObject:
   m_ObjectHideFlags: 0
@@ -3333,7 +3346,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2038767004}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
