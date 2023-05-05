@@ -6,11 +6,19 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     //Load scene
-    public void Play()
+   
+    public void Menu()
     {
-        SceneManager.LoadScene("complete_track_demo");
-        //SceneManager.LoadScene("Map1");
+        SceneManager.LoadScene(0);
     }
+    public void Level1(){
+        SceneManager.LoadScene(1);
+    }
+     public void TrackSelector()
+    {
+        SceneManager.LoadScene(2);
+    }
+    
 
     //Quit game
     public void Exit()
@@ -19,4 +27,5 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Player has left the game");
     }
 
+    
 }
