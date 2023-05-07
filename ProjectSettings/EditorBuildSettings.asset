@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SelectTrack.unity
     guid: 987b5c70042966846b2145749a8cfccf
+  - enabled: 1
+    path: Assets/Scenes/Level2.unity
+    guid: 8e8641b858c43dc49943b24891150121
   m_configObjects: {}

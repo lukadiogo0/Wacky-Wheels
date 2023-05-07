@@ -15,8 +15,8 @@ public class UnlockTrack : MonoBehaviour
     void Update()
     {
         //inserir condicao que torna interactable
-        //Level2.GetComponent<Button>().interactable = true; 
-        //Level3.GetComponent<Button>().interactable = true; 
+        Level2.GetComponent<Button>().interactable = true; 
+        Level3.GetComponent<Button>().interactable = true; 
         //Level4.GetComponent<Button>().interactable = true; 
 
 
