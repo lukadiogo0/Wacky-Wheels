@@ -3,7 +3,29 @@ guid: c0fefceefe666bb4682b272ec8c5bdd0
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - rocketPrefab: {fileID: 7138345672653647241, guid: 13c437274a429214881c3cd0620c5660, type: 3}
+  - rocketSpawnPoint: {instanceID: 0}
+  - frontLeftMesh: {instanceID: 0}
+  - frontLeftCollider: {instanceID: 0}
+  - frontRightMesh: {instanceID: 0}
+  - frontRightCollider: {instanceID: 0}
+  - rearLeftMesh: {instanceID: 0}
+  - rearLeftCollider: {instanceID: 0}
+  - rearRightMesh: {instanceID: 0}
+  - rearRightCollider: {instanceID: 0}
+  - RLWParticleSystem: {instanceID: 0}
+  - RRWParticleSystem: {instanceID: 0}
+  - RLWTireSkid: {instanceID: 0}
+  - RRWTireSkid: {instanceID: 0}
+  - carSpeedText: {instanceID: 0}
+  - carEngineSound: {instanceID: 0}
+  - tireScreechSound: {instanceID: 0}
+  - throttleButton: {instanceID: 0}
+  - reverseButton: {instanceID: 0}
+  - turnRightButton: {instanceID: 0}
+  - turnLeftButton: {instanceID: 0}
+  - handbrakeButton: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

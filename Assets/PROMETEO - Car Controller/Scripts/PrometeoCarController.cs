@@ -14,12 +14,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class PrometeoCarController : MonoBehaviour
 {
 
+    public GameObject rocketPrefab;
+    public Transform rocketSpawnPoint;
+    public float rocketSpeed = 10f;
+
+    private bool canFireRocket = false;
+
     //CAR SETUP
 
-      [Space(20)]
+    [Space(20)]
       //[Header("CAR SETUP")]
       [Space(10)]
       [Range(20, 190)]
@@ -161,10 +168,11 @@ public class PrometeoCarController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-      //In this part, we set the 'carRigidbody' value with the Rigidbody attached to this
-      //gameObject. Also, we define the center of mass of the car with the Vector3 given
-      //in the inspector.
-      carRigidbody = gameObject.GetComponent<Rigidbody>();
+
+        //In this part, we set the 'carRigidbody' value with the Rigidbody attached to this
+        //gameObject. Also, we define the center of mass of the car with the Vector3 given
+        //in the inspector.
+        carRigidbody = gameObject.GetComponent<Rigidbody>();
       carRigidbody.centerOfMass = bodyMassCenter;
 
       //Initial setup to calculate the drift value of the car. This part could look a bit
@@ -266,10 +274,15 @@ public class PrometeoCarController : MonoBehaviour
     void Update()
     {
 
-      //CAR DATA
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canFireRocket)
+        {
+            FireRocket();
+        }
 
-      // We determine the speed of the car.
-      carSpeed = (2 * Mathf.PI * frontLeftCollider.radius * frontLeftCollider.rpm * 60) / 1000;
+        //CAR DATA
+
+        // We determine the speed of the car.
+        carSpeed = (2 * Mathf.PI * frontLeftCollider.radius * frontLeftCollider.rpm * 60) / 1000;
       // Save the local velocity of the car in the x axis. Used to know if the car is drifting.
       localVelocityX = transform.InverseTransformDirection(carRigidbody.velocity).x;
       // Save the local velocity of the car in the z axis. Used to know if the car is going forward or backwards.
@@ -771,4 +784,26 @@ public class PrometeoCarController : MonoBehaviour
       }
     }
 
+    void FireRocket()
+    {
+        GameObject rocket = Instantiate(rocketPrefab, rocketSpawnPoint.position, transform.rotation);
+        rocket.GetComponent<Rigidbody>().velocity = transform.forward * rocketSpeed;
+        canFireRocket = false;
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("ItemBox") && other.transform.childCount > 0 && other.transform.GetChild(0).name == "Shroom")
+        {
+            canFireRocket = true;
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("ItemBox") && other.transform.childCount > 0 && other.transform.GetChild(0).name == "Shroom")
+        {
+            canFireRocket = false;
+        }
+    }
 }
