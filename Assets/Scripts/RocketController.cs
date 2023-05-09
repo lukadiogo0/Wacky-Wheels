@@ -7,10 +7,14 @@ public class RocketController : MonoBehaviour
     public GameObject rocketPrefab;
     public Transform rocketSpawnPoint;
     public float rocketSpeed = 10f;
+    public Sprite defaultSprite;
+
+    public static bool hasRocketPowerup = false; // added this variable
+    public static bool rocketHasBeenUsed = false;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && hasRocketPowerup) // modified this line
         {
             // Spawn the rocket prefab at the rocket spawn point
             GameObject rocket = Instantiate(rocketPrefab, rocketSpawnPoint.position, rocketSpawnPoint.rotation);
@@ -20,6 +24,11 @@ public class RocketController : MonoBehaviour
 
             // Set the velocity of the rocket
             rb.velocity = transform.forward * rocketSpeed;
+
+            // reset the rocket power-up flag to false
+            hasRocketPowerup = false;
+
+            rocketHasBeenUsed = true;
         }
     }
 }
