@@ -87,7 +87,10 @@ public class KartController : MonoBehaviour
         {
             CurrentSpeed = Mathf.Lerp(CurrentSpeed, 0, Time.deltaTime * 1.5f); //speed
         }
-
+        if ((driftLeft || driftRight))
+        {
+            rb.AddForce(-transform.up * outwardsDriftForce * Time.deltaTime, ForceMode.Acceleration);
+        }
         Vector3 vel = transform.forward * CurrentSpeed;
         vel.y = rb.velocity.y; //gravity
         rb.velocity = vel;
