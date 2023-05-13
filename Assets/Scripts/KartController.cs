@@ -67,7 +67,6 @@ public class KartController : MonoBehaviour
         tireSteer();
         steer();
         groundNormalRotation();
-        drift();
         boosts();
     }
 
@@ -87,10 +86,12 @@ public class KartController : MonoBehaviour
         {
             CurrentSpeed = Mathf.Lerp(CurrentSpeed, 0, Time.deltaTime * 1.5f); //speed
         }
-        if ((driftLeft || driftRight))
+
+        if (driftLeft || driftRight)
         {
             rb.AddForce(-transform.up * outwardsDriftForce * Time.deltaTime, ForceMode.Acceleration);
         }
+
         Vector3 vel = transform.forward * CurrentSpeed;
         vel.y = rb.velocity.y; //gravity
         rb.velocity = vel;
@@ -149,10 +150,9 @@ public class KartController : MonoBehaviour
 
     private void drift()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && touchingGround)
+        if (Input.GetKeyDown(KeyCode.Space) && touchingGround && RealSpeed > 40)
         {
             transform.GetChild(0).GetComponent<Animator>().SetTrigger("DriftHop");
-            //transform.GetChild(0).GetComponent<Animation>().Play("DriftHop");
             if (steerDirection > 0)
             {
                 driftRight = true;
@@ -164,12 +164,9 @@ public class KartController : MonoBehaviour
                 driftLeft = true;
             }
         }
-
-
         if (Input.GetKey(KeyCode.Space) && touchingGround && CurrentSpeed > 40 && Input.GetAxis("Horizontal") != 0)
         {
             driftTime += Time.deltaTime;
-
             //particle effects (sparks)
             if (driftTime >= 1.5 && driftTime < 4)
             {
@@ -369,5 +366,10 @@ public class KartController : MonoBehaviour
             backLeftTire.Rotate(90 * Time.deltaTime * RealSpeed * 0.5f, 0, 0);
             backRightTire.Rotate(90 * Time.deltaTime * RealSpeed * 0.5f, 0, 0);
         }
+    }
+
+    private void Update()
+    {
+        drift();
     }
 }
