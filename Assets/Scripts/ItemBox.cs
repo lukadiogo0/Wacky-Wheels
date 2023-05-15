@@ -44,6 +44,35 @@ public class ItemBox : MonoBehaviour
                 RocketController.rocketHasBeenUsed = false;
 
             }
+            else
+            {
+                RocketController.hasRocketPowerup = false;
+                RocketController.rocketHasBeenUsed = false;
+            }
+
+            if (ItemSprites[randomIndex].name == "Star")
+            {
+                // set the propulsor power-up flag to true
+                Propulsor.hasPropulsorPowerup = true;
+                Propulsor.propulsorHasBeenUsed = false;
+            }
+            else
+            {
+                Propulsor.hasPropulsorPowerup = false;
+                Propulsor.propulsorHasBeenUsed = false;
+            }
+
+            if (ItemSprites[randomIndex].name == "Coin")
+            {
+                // set the propulsor power-up flag to true
+                Obstacle.hasObstacle = true;
+                Obstacle.obstacleHasBeenUsed = false;
+            }
+            else
+            {
+                Obstacle.hasObstacle = false;
+                Obstacle.obstacleHasBeenUsed = false;
+            }
 
             StartCoroutine(RespawnCoroutine());
         }
@@ -73,7 +102,30 @@ public class ItemBox : MonoBehaviour
             itemImage.texture = defaultSprite.texture;
             RocketController.rocketHasBeenUsed = false;
         }
-      
+
+        if (Propulsor.hasPropulsorPowerup == false && Propulsor.propulsorHasBeenUsed == true)
+        {
+            // get the item display child object
+            GameObject itemDisplay = ItemDisplayObject.transform.Find("ItemDisplay").gameObject;
+
+            // get the raw image component of the item image child object
+            RawImage itemImage = itemDisplay.transform.Find("ItemImage").GetComponent<RawImage>();
+            itemImage.texture = defaultSprite.texture;
+            Propulsor.propulsorHasBeenUsed = false;
+        }
+
+
+        if (Obstacle.hasObstacle == false && Obstacle.obstacleHasBeenUsed == true)
+        {
+            // get the item display child object
+            GameObject itemDisplay = ItemDisplayObject.transform.Find("ItemDisplay").gameObject;
+
+            // get the raw image component of the item image child object
+            RawImage itemImage = itemDisplay.transform.Find("ItemImage").GetComponent<RawImage>();
+            itemImage.texture = defaultSprite.texture;
+            Obstacle.obstacleHasBeenUsed = false;
+        }
+
         if (canRespawn && !gameObject.GetComponent<MeshRenderer>().enabled)
         {
             gameObject.GetComponent<MeshRenderer>().enabled = true;

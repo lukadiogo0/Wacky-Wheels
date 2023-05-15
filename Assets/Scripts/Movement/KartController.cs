@@ -27,7 +27,7 @@ public class KartController : MonoBehaviour
     bool driftRight = false;
     float outwardsDriftForce = 50000;
 
-    public bool isSliding = false;
+    
 
     private bool touchingGround;
 
@@ -38,21 +38,17 @@ public class KartController : MonoBehaviour
     public float normalRotation = 0f; // rotação normal das rodas
     private bool isRotating = false;
 
-    /*[Header("Particles Drift Sparks")]
+    [Header("Particles Drift Sparks")]
     public Transform leftDrift;
     public Transform rightDrift;
     public Color drift1;
     public Color drift2;
-    public Color drift3;*/
+    public Color drift3;
 
     [HideInInspector]
     public float BoostTime = 0;
-
-
-    //public Transform boostFire;
-    //public Transform boostExplosion;
-
-
+    [HideInInspector]
+    public bool isSliding = false;
 
     // Start is called before the first frame update
     void Start()
@@ -168,11 +164,12 @@ public class KartController : MonoBehaviour
         {
             driftTime += Time.deltaTime;
             //particle effects (sparks)
-            if (driftTime >= 1.5 && driftTime < 4)
+            if (driftTime < 4)
             {
 
-                /*for (int i = 0; i < leftDrift.childCount; i++)
+                for (int i = 0; i < leftDrift.childCount; i++)
                 {
+                    
                     ParticleSystem DriftPS = rightDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>(); //right wheel particles
                     ParticleSystem.MainModule PSMAIN = DriftPS.main;
 
@@ -188,12 +185,12 @@ public class KartController : MonoBehaviour
                         DriftPS2.Play();
                     }
 
-                }*/
+                }
             }
             if (driftTime >= 4 && driftTime < 7)
             {
                 //drift color particles
-                /*for (int i = 0; i < leftDrift.childCount; i++)
+                for (int i = 0; i < leftDrift.childCount; i++)
                 {
                     ParticleSystem DriftPS = rightDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>();
                     ParticleSystem.MainModule PSMAIN = DriftPS.main;
@@ -203,12 +200,12 @@ public class KartController : MonoBehaviour
                     PSMAIN2.startColor = drift2;
 
 
-                }*/
+                }
 
             }
             if (driftTime >= 7)
             {
-                /*for (int i = 0; i < leftDrift.childCount; i++)
+                for (int i = 0; i < leftDrift.childCount; i++)
                 {
 
                     ParticleSystem DriftPS = rightDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>();
@@ -218,7 +215,7 @@ public class KartController : MonoBehaviour
                     PSMAIN.startColor = drift3;
                     PSMAIN2.startColor = drift3;
 
-                }*/
+                }
             }
         }
 
@@ -256,7 +253,6 @@ public class KartController : MonoBehaviour
 
                 ParticleSystem DriftPS2 = leftDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>(); //left wheel particles
                 ParticleSystem.MainModule PSMAIN2 = DriftPS2.main;
-
                 DriftPS.Stop();
                 DriftPS2.Stop();
 
@@ -269,47 +265,18 @@ public class KartController : MonoBehaviour
         BoostTime -= Time.deltaTime;
         if (BoostTime > 0)
         {
-            /*for (int i = 0; i < boostFire.childCount; i++)
-            {
-                if (!boostFire.GetChild(i).GetComponent<ParticleSystem>().isPlaying)
-                {
-                    boostFire.GetChild(i).GetComponent<ParticleSystem>().Play();
-                }
-
-            }*/
             MaxSpeed = boostSpeed;
 
             CurrentSpeed = Mathf.Lerp(CurrentSpeed, MaxSpeed, 1 * Time.deltaTime);
         }
         else
         {
-            /*for (int i = 0; i < boostFire.childCount; i++)
-            {
-                boostFire.GetChild(i).GetComponent<ParticleSystem>().Stop();
-            }*/
             MaxSpeed = boostSpeed - 20;
         }
     }
 
     private void tireSteer()
     {
-
-        /*if (Input.GetKey(KeyCode.A))
-        {
-            frontLeftTire.localEulerAngles = Vector3.Lerp(frontLeftTire.localEulerAngles, new Vector3(0, 310, 0), 5 * Time.deltaTime);
-            frontRightTire.localEulerAngles = Vector3.Lerp(frontLeftTire.localEulerAngles, new Vector3(0, 310, 0), 5 * Time.deltaTime);
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            frontLeftTire.localEulerAngles = Vector3.Lerp(frontLeftTire.localEulerAngles, new Vector3(0, 50, 0), 5 * Time.deltaTime);
-            frontRightTire.localEulerAngles = Vector3.Lerp(frontLeftTire.localEulerAngles, new Vector3(0, 50, 0), 5 * Time.deltaTime);
-        }
-        else
-        {
-            frontLeftTire.localEulerAngles = Vector3.Lerp(frontLeftTire.localEulerAngles, new Vector3(0, 0, 0), 5 * Time.deltaTime);
-            frontRightTire.localEulerAngles = Vector3.Lerp(frontLeftTire.localEulerAngles, new Vector3(0, 0, 0), 5 * Time.deltaTime);
-        }*/
-
         float horizontalInput = Input.GetAxis("Horizontal");
 
         if (!isRotating)
