@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class KartController : MonoBehaviour
 {
     private Rigidbody rb;
-
+    public float offsety;
 
     private float CurrentSpeed = 0;
     public float MaxSpeed;
@@ -50,10 +50,13 @@ public class KartController : MonoBehaviour
     [HideInInspector]
     public bool isSliding = false;
 
+    private IDecisions decisions;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        decisions = GetComponent<IDecisions>();
     }
 
     // Update is called once per frame
@@ -95,7 +98,7 @@ public class KartController : MonoBehaviour
 
     private void steer()
     {
-        steerDirection = Input.GetAxisRaw("Horizontal"); // -1, 0, 1
+        steerDirection = decisions.Turn(); // -1, 0, 1
         Vector3 steerDirVect; //this is used for the final rotation of the kart for steering
 
         float steerAmount;
@@ -133,7 +136,9 @@ public class KartController : MonoBehaviour
     private void groundNormalRotation()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, -transform.up, out hit, 0.75f, groundMask))
+        Vector3 carposition = transform.position + new Vector3(0f, offsety, 0f);
+        Debug.DrawRay(carposition, -transform.up, Color.white);
+        if (Physics.Raycast(carposition, -transform.up, out hit, 0.75f, groundMask))
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.up * 2, hit.normal) * transform.rotation, 7.5f * Time.deltaTime);
             touchingGround = true;
@@ -146,6 +151,7 @@ public class KartController : MonoBehaviour
 
     private void drift()
     {
+        Debug.Log(steerDirection + " " + touchingGround);
         if (Input.GetKeyDown(KeyCode.Space) && touchingGround && RealSpeed > 40)
         {
             transform.GetChild(0).GetComponent<Animator>().SetTrigger("DriftHop");
@@ -246,17 +252,14 @@ public class KartController : MonoBehaviour
             //reset everything
             driftTime = 0;
             //stop particles
-            /*for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 5; i++)
             {
                 ParticleSystem DriftPS = rightDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>(); //right wheel particles
-                ParticleSystem.MainModule PSMAIN = DriftPS.main;
-
                 ParticleSystem DriftPS2 = leftDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>(); //left wheel particles
-                ParticleSystem.MainModule PSMAIN2 = DriftPS2.main;
                 DriftPS.Stop();
                 DriftPS2.Stop();
 
-            }*/
+            }
         }
     }
 
