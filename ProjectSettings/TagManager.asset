@@ -8,6 +8,8 @@ TagManager:
   - ItemBox
   - Obstacle
   - Enemy
+  - PowerUp
+  - Ground
   layers:
   - Default
   - TransparentFX

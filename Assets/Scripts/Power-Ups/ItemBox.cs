@@ -50,6 +50,8 @@ public class ItemBox : MonoBehaviour
                 RocketController.rocketHasBeenUsed = false;
             }
 
+
+
             if (ItemSprites[randomIndex].name == "Star")
             {
                 // set the propulsor power-up flag to true
@@ -62,9 +64,10 @@ public class ItemBox : MonoBehaviour
                 Propulsor.propulsorHasBeenUsed = false;
             }
 
+
+
             if (ItemSprites[randomIndex].name == "Coin")
             {
-                // set the propulsor power-up flag to true
                 Obstacle.hasObstacle = true;
                 Obstacle.obstacleHasBeenUsed = false;
             }
@@ -74,9 +77,10 @@ public class ItemBox : MonoBehaviour
                 Obstacle.obstacleHasBeenUsed = false;
             }
 
+
+
             if (ItemSprites[randomIndex].name == "Shrink")
             {
-                // set the propulsor power-up flag to true
                 ShrinkController.hasShrinkPowerup = true;
                 ShrinkController.shrinkHasBeenUsed = false;
             }
@@ -85,6 +89,21 @@ public class ItemBox : MonoBehaviour
                 ShrinkController.hasShrinkPowerup = false;
                 ShrinkController.shrinkHasBeenUsed = false;
             }
+
+
+
+            if (ItemSprites[randomIndex].name == "Shield")
+            {
+                Shield.hasShield = true;
+                Shield.shieldHasBeenUsed = false;
+            }
+            else
+            {
+                Shield.hasShield = false;
+                Shield.shieldHasBeenUsed = false;
+            }
+
+
 
             StartCoroutine(RespawnCoroutine());
         }
@@ -139,6 +158,17 @@ public class ItemBox : MonoBehaviour
         }
 
         if (ShrinkController.hasShrinkPowerup == false && ShrinkController.shrinkHasBeenUsed == true)
+        {
+            // get the item display child object
+            GameObject itemDisplay = ItemDisplayObject.transform.Find("ItemDisplay").gameObject;
+
+            // get the raw image component of the item image child object
+            RawImage itemImage = itemDisplay.transform.Find("ItemImage").GetComponent<RawImage>();
+            itemImage.texture = defaultSprite.texture;
+            Obstacle.obstacleHasBeenUsed = false;
+        }
+
+        if (Shield.hasShield == false && Shield.shieldHasBeenUsed == true)
         {
             // get the item display child object
             GameObject itemDisplay = ItemDisplayObject.transform.Find("ItemDisplay").gameObject;
