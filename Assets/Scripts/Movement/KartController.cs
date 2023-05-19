@@ -151,7 +151,7 @@ public class KartController : MonoBehaviour
 
     private void drift()
     {
-        Debug.Log(steerDirection + " " + touchingGround);
+        //Debug.Log(steerDirection + " " + touchingGround);
         if (Input.GetKeyDown(KeyCode.Space) && touchingGround && RealSpeed > 40)
         {
             transform.GetChild(0).GetComponent<Animator>().SetTrigger("DriftHop");

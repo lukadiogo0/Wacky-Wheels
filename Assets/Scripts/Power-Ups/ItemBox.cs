@@ -74,6 +74,18 @@ public class ItemBox : MonoBehaviour
                 Obstacle.obstacleHasBeenUsed = false;
             }
 
+            if (ItemSprites[randomIndex].name == "Shrink")
+            {
+                // set the propulsor power-up flag to true
+                ShrinkController.hasShrinkPowerup = true;
+                ShrinkController.shrinkHasBeenUsed = false;
+            }
+            else
+            {
+                ShrinkController.hasShrinkPowerup = false;
+                ShrinkController.shrinkHasBeenUsed = false;
+            }
+
             StartCoroutine(RespawnCoroutine());
         }
     }
@@ -116,6 +128,17 @@ public class ItemBox : MonoBehaviour
 
 
         if (Obstacle.hasObstacle == false && Obstacle.obstacleHasBeenUsed == true)
+        {
+            // get the item display child object
+            GameObject itemDisplay = ItemDisplayObject.transform.Find("ItemDisplay").gameObject;
+
+            // get the raw image component of the item image child object
+            RawImage itemImage = itemDisplay.transform.Find("ItemImage").GetComponent<RawImage>();
+            itemImage.texture = defaultSprite.texture;
+            Obstacle.obstacleHasBeenUsed = false;
+        }
+
+        if (ShrinkController.hasShrinkPowerup == false && ShrinkController.shrinkHasBeenUsed == true)
         {
             // get the item display child object
             GameObject itemDisplay = ItemDisplayObject.transform.Find("ItemDisplay").gameObject;
