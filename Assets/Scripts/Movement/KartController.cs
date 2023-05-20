@@ -30,10 +30,10 @@ public class KartController : MonoBehaviour
     private bool touchingGround;
 
     public LayerMask groundMask;
-    public float rotateSpeed = 100f; // velocidade de rotação das rodas
-    public float maxRotationAngle = 35f; // limite de rotação das rodas
-    public float currentRotation = 0f; // rotação atual das rodas
-    public float normalRotation = 0f; // rotação normal das rodas
+    public float rotateSpeed = 100f; // velocidade de rotaï¿½ï¿½o das rodas
+    public float maxRotationAngle = 35f; // limite de rotaï¿½ï¿½o das rodas
+    public float currentRotation = 0f; // rotaï¿½ï¿½o atual das rodas
+    public float normalRotation = 0f; // rotaï¿½ï¿½o normal das rodas
     private bool isRotating = false;
 
     [Header("Particles Drift Sparks")]
@@ -148,12 +148,7 @@ public class KartController : MonoBehaviour
 
     private void drift()
     {
-<<<<<<< Updated upstream
-        //Debug.Log(steerDirection + " " + touchingGround);
-        if (Input.GetKeyDown(KeyCode.Space) && touchingGround && RealSpeed > 40)
-=======
         if (decisions.DriftAnim() && touchingGround && CurrentSpeed > 40 && steerDirection != 0)
->>>>>>> Stashed changes
         {
             transform.GetChild(0).GetComponent<Animator>().SetTrigger("DriftHop");
             if (steerDirection > 0)
@@ -282,25 +277,25 @@ public class KartController : MonoBehaviour
 
         if (!isRotating)
         {
-            // se as rodas não estiverem girando, defina a rotação atual como normal
+            // se as rodas nï¿½o estiverem girando, defina a rotaï¿½ï¿½o atual como normal
             currentRotation = Mathf.MoveTowards(currentRotation, normalRotation, rotateSpeed * Time.deltaTime);
         }
 
-        // verifica se o botão de entrada para a esquerda está sendo pressionado
+        // verifica se o botï¿½o de entrada para a esquerda estï¿½ sendo pressionado
         if (horizontalInput < 0)
         {
             currentRotation = Mathf.Clamp(currentRotation - maxRotationAngle, -maxRotationAngle, 0f);
             isRotating = true;
         }
 
-        // verifica se o botão de entrada para a direita está sendo pressionado
+        // verifica se o botï¿½o de entrada para a direita estï¿½ sendo pressionado
         if (horizontalInput > 0)
         {
             currentRotation = Mathf.Clamp(currentRotation + maxRotationAngle, 0f, maxRotationAngle);
             isRotating = true;
         }
 
-        // calcula a rotação atual com base na velocidade de rotação
+        // calcula a rotaï¿½ï¿½o atual com base na velocidade de rotaï¿½ï¿½o
         float targetRotation = currentRotation;
         float rotationDelta = rotateSpeed * Time.deltaTime;
 
@@ -311,7 +306,7 @@ public class KartController : MonoBehaviour
             frontRightTire.localRotation = Quaternion.Euler(0f, newRotation, 0f);
         }
 
-        // verifica se nenhum dos botões de entrada está sendo pressionado
+        // verifica se nenhum dos botï¿½es de entrada estï¿½ sendo pressionado
         if (horizontalInput == 0)
         {
             isRotating = false;
