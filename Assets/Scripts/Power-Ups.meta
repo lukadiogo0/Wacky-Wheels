@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< Updated upstream:Assets/Scripts/Power-Ups.meta
 guid: 34e83f8866cc1d149b18a1f3e3dc30ac
 folderAsset: yes
+========
+guid: 90f7613b85ac3ed4e9ccd8c82c4e72c2
+>>>>>>>> Stashed changes:Assets/Scenes/Level1.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

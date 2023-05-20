@@ -1,18 +1,9 @@
 fileFormatVersion: 2
-<<<<<<< Updated upstream
 <<<<<<<< Updated upstream:Assets/Scenes/Level1.unity.meta
-guid: 40b95878ecb1dab4ba7bf84a538a1792
+guid: 1b2c8b499ca3c8d42b5b68512285df37
 ========
 guid: ed5ba80b2f9f4bc4da3f5aade87d8241
 >>>>>>>> Stashed changes:Assets/EasyRoads3D/SRP Support Packages/HDRP_10_3_2.unitypackage.meta
-=======
-<<<<<<<< Updated upstream:Assets/Scripts/Power-Ups.meta
-guid: 34e83f8866cc1d149b18a1f3e3dc30ac
-folderAsset: yes
-========
-guid: 90f7613b85ac3ed4e9ccd8c82c4e72c2
->>>>>>>> Stashed changes:Assets/Scenes/Level1.unity.meta
->>>>>>> Stashed changes
 DefaultImporter:
   externalObjects: {}
   userData: 
