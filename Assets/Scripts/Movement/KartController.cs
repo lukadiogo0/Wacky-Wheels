@@ -163,9 +163,10 @@ public class KartController : MonoBehaviour
             }
         }
 
-        if (decisions.Drift() && touchingGround && CurrentSpeed > 40 && steerDirection != 0)
+        if (decisions.Drift() && touchingGround && CurrentSpeed > 40 && isSliding)
         {
             driftTime += Time.deltaTime;
+
             //particle effects (sparks)
             if (driftTime < 2)
             {
