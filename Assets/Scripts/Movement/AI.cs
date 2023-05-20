@@ -7,10 +7,16 @@ public class AI : MonoBehaviour, IDecisions
     //o AI stá sempre a tentar olhar para o proximo waypoint
     //para isso vai ter de decidir fazer turns normais ou com drift
     //
-    public void Drift()
+    public bool Drift()
     {
         throw new System.NotImplementedException();
     }
+
+    public bool DriftAnim()
+    {
+        throw new System.NotImplementedException();
+    }
+
 
     public float Turn()
     {
@@ -18,6 +24,11 @@ public class AI : MonoBehaviour, IDecisions
     }
 
     public bool Accelerate()
+    {
+        return false;
+    }
+
+    public bool Brake()
     {
         return false;
     }

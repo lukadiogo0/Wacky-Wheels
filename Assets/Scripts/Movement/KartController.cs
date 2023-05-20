@@ -27,8 +27,6 @@ public class KartController : MonoBehaviour
     bool driftRight = false;
     float outwardsDriftForce = 50000;
 
-    
-
     private bool touchingGround;
 
     public LayerMask groundMask;
@@ -73,11 +71,11 @@ public class KartController : MonoBehaviour
     {
         RealSpeed = transform.InverseTransformDirection(rb.velocity).z; //real velocity before setting the value. This can be useful if say you want to have hair moving on the player, but don't want it to move if you are accelerating into a wall, since checking velocity after it has been applied will always be the applied value, and not real
 
-        if (Input.GetKey(KeyCode.W))
+        if (decisions.Accelerate())
         {
             CurrentSpeed = Mathf.Lerp(CurrentSpeed, MaxSpeed, Time.deltaTime * 0.5f); //speed
         }
-        else if (Input.GetKey(KeyCode.S))
+        else if (decisions.Brake())
         {
             CurrentSpeed = Mathf.Lerp(CurrentSpeed, -MaxSpeed / 1.75f, 1f * Time.deltaTime);
         }
@@ -105,7 +103,7 @@ public class KartController : MonoBehaviour
 
         if (driftLeft && !driftRight)
         {
-            steerDirection = Input.GetAxis("Horizontal") < 0 ? -1.5f : -0.5f;
+            steerDirection = decisions.Turn() < 0 ? -1.5f : -0.5f;
             transform.GetChild(0).localRotation = Quaternion.Lerp(transform.GetChild(0).localRotation, Quaternion.Euler(0, -20f, 0), 8f * Time.deltaTime);
 
 
@@ -114,7 +112,7 @@ public class KartController : MonoBehaviour
         }
         else if (driftRight && !driftLeft)
         {
-            steerDirection = Input.GetAxis("Horizontal") > 0 ? 1.5f : 0.5f;
+            steerDirection = decisions.Turn() > 0 ? 1.5f : 0.5f;
             transform.GetChild(0).localRotation = Quaternion.Lerp(transform.GetChild(0).localRotation, Quaternion.Euler(0, 20f, 0), 8f * Time.deltaTime);
 
             if (isSliding && touchingGround)
@@ -137,7 +135,6 @@ public class KartController : MonoBehaviour
     {
         RaycastHit hit;
         Vector3 carposition = transform.position + new Vector3(0f, offsety, 0f);
-        Debug.DrawRay(carposition, -transform.up, Color.white);
         if (Physics.Raycast(carposition, -transform.up, out hit, 0.75f, groundMask))
         {
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.FromToRotation(transform.up * 2, hit.normal) * transform.rotation, 7.5f * Time.deltaTime);
@@ -151,8 +148,12 @@ public class KartController : MonoBehaviour
 
     private void drift()
     {
+<<<<<<< Updated upstream
         //Debug.Log(steerDirection + " " + touchingGround);
         if (Input.GetKeyDown(KeyCode.Space) && touchingGround && RealSpeed > 40)
+=======
+        if (decisions.DriftAnim() && touchingGround && CurrentSpeed > 40 && steerDirection != 0)
+>>>>>>> Stashed changes
         {
             transform.GetChild(0).GetComponent<Animator>().SetTrigger("DriftHop");
             if (steerDirection > 0)
@@ -166,13 +167,13 @@ public class KartController : MonoBehaviour
                 driftLeft = true;
             }
         }
-        if (Input.GetKey(KeyCode.Space) && touchingGround && CurrentSpeed > 40 && Input.GetAxis("Horizontal") != 0)
+
+        if (decisions.Drift() && touchingGround && CurrentSpeed > 40 && steerDirection != 0)
         {
             driftTime += Time.deltaTime;
             //particle effects (sparks)
-            if (driftTime < 4)
+            if (driftTime < 2)
             {
-
                 for (int i = 0; i < leftDrift.childCount; i++)
                 {
                     
@@ -193,7 +194,7 @@ public class KartController : MonoBehaviour
 
                 }
             }
-            if (driftTime >= 4 && driftTime < 7)
+            if (driftTime >= 2 && driftTime < 4)
             {
                 //drift color particles
                 for (int i = 0; i < leftDrift.childCount; i++)
@@ -209,7 +210,7 @@ public class KartController : MonoBehaviour
                 }
 
             }
-            if (driftTime >= 7)
+            if (driftTime >= 4)
             {
                 for (int i = 0; i < leftDrift.childCount; i++)
                 {
@@ -225,25 +226,23 @@ public class KartController : MonoBehaviour
             }
         }
 
-        if (!Input.GetKey(KeyCode.Space) || RealSpeed < 40)
+        if (!decisions.Drift() || RealSpeed < 40)
         {
             driftLeft = false;
             driftRight = false;
             isSliding = false; /////////
 
-
-
             //give a boost
-            if (driftTime > 1.5 && driftTime < 4)
+            if (driftTime > 0.5 && driftTime < 2)
             {
                 BoostTime = 0.75f;
             }
-            if (driftTime >= 4 && driftTime < 7)
+            if (driftTime >= 2 && driftTime < 3)
             {
                 BoostTime = 1.5f;
 
             }
-            if (driftTime >= 7)
+            if (driftTime >= 3)
             {
                 BoostTime = 2.5f;
 
@@ -269,8 +268,7 @@ public class KartController : MonoBehaviour
         if (BoostTime > 0)
         {
             MaxSpeed = boostSpeed;
-
-            CurrentSpeed = Mathf.Lerp(CurrentSpeed, MaxSpeed, 1 * Time.deltaTime);
+            CurrentSpeed = Mathf.Lerp(CurrentSpeed, MaxSpeed, 1 * Time.deltaTime);       
         }
         else
         {
@@ -280,7 +278,7 @@ public class KartController : MonoBehaviour
 
     private void tireSteer()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
+        float horizontalInput = decisions.Turn();
 
         if (!isRotating)
         {

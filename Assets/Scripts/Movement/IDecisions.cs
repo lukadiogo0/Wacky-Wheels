@@ -6,5 +6,7 @@ public interface IDecisions
 {
     public float Turn();
     public bool Accelerate();
-    public void Drift();
+    public bool Brake();
+    public bool DriftAnim();
+    public bool Drift();
 }

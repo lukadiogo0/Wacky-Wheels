@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class PlayerInputs : MonoBehaviour, IDecisions
 {
-    public void Drift()
-    {
-        throw new System.NotImplementedException();
-    }
-
     public float Turn()
     {
         return Input.GetAxis("Horizontal");
@@ -16,7 +11,34 @@ public class PlayerInputs : MonoBehaviour, IDecisions
 
     public bool Accelerate()
     {
-        if(Input.GetAxis("Vertical")!= 0)
+        if(Input.GetAxis("Accelerate") > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool Brake()
+    {
+        if (Input.GetAxis("Brake") > 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool DriftAnim()
+    {
+        if (Input.GetButtonDown("Drift"))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public bool Drift()
+    {
+        if (Input.GetButton("Drift"))
         {
             return true;
         }
