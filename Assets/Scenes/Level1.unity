@@ -28574,9 +28574,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 451985330dbf5c64f8fbae996bb82ced, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MinuteBox: {fileID: 0}
-  SecondBox: {fileID: 0}
-  MiliSecondBox: {fileID: 0}
+  MinuteBox: {fileID: 1109341009}
+  SecondBox: {fileID: 606406417}
+  MiliSecondBox: {fileID: 110333660}
 --- !u!4 &733453755
 Transform:
   m_ObjectHideFlags: 0
@@ -32036,7 +32036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carTransformList:
-  - {fileID: 0}
+  - {fileID: 1467695040}
 --- !u!1 &792276136
 GameObject:
   m_ObjectHideFlags: 0
