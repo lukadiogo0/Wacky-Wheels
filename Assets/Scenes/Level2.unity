@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -23004,6 +23004,7 @@ GameObject:
   - component: {fileID: 931863251}
   - component: {fileID: 931863250}
   - component: {fileID: 931863249}
+  - component: {fileID: 931863254}
   m_Layer: 0
   m_Name: Jogador
   m_TagString: Player
@@ -23057,6 +23058,7 @@ MonoBehaviour:
   drift3: {r: 1, g: 0, b: 0.8980392, a: 1}
   BoostTime: 0
   isSliding: 0
+  ItemBoxPrefab: {fileID: 0}
 --- !u!135 &931863251
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -23103,6 +23105,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+--- !u!114 &931863254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 931863248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 2209905356
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
 --- !u!1001 &933656061
 PrefabInstance:
   m_ObjectHideFlags: 0
