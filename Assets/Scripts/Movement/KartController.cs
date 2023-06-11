@@ -1,9 +1,10 @@
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.Netcode;
 
-public class KartController : MonoBehaviour
+public class KartController : NetworkBehaviour
 {
     private Rigidbody rb;
     public float offsety;
@@ -50,7 +51,7 @@ public class KartController : MonoBehaviour
 
     private IDecisions decisions;
 
-    
+    [SerializeField] private Transform ItemBoxPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -62,6 +63,13 @@ public class KartController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!IsOwner) return;
+
+        if(Input.GetKeyDown(KeyCode.T)){
+            Transform ItemBoxTransform = Instantiate(ItemBoxPrefab);
+            ItemBoxTransform.GetComponent<NetworkObject>().Spawn(true);
+        }
+        
         move();
         tireSteer();
         steer();
