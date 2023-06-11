@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1897599727064649481}
   m_Layer: 0
   m_Name: Rocket 1
-  m_TagString: Untagged
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,10 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0c68fe678422014c901c2853ea98087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 50
+  speed: 80
   lifetime: 5
-  explosionRadius: 3
-  explosionForce: 100
+  explosionRadius: 0
+  explosionForce: 1000
   distanceFromGround: 1.5
 --- !u!54 &624298529906312820
 Rigidbody:
