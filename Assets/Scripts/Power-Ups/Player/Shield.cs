@@ -16,8 +16,12 @@ public class Shield : MonoBehaviour
     private GameObject shieldSpawnPoint; // Reference to the shield spawn point
     private GameObject currentShield; // Reference to the current shield instance
 
+    public AudioClip shieldSound;
+    private AudioSource audioSource;
+
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         shieldCollider = gameObject.AddComponent<SphereCollider>();
         shieldCollider.radius = barrierRadius;
         shieldCollider.isTrigger = true;
@@ -45,6 +49,7 @@ public class Shield : MonoBehaviour
 
     private void ActivateShield()
     {
+         audioSource.PlayOneShot(shieldSound);
         isShieldActive = true;
         shieldHasBeenUsed = true;
         hasShield = false;

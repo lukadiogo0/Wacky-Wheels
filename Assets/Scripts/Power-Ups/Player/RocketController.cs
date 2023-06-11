@@ -11,6 +11,12 @@ public class RocketController : MonoBehaviour
 
     public static bool hasRocketPowerup = false;
     public static bool rocketHasBeenUsed = false;
+    public AudioClip rocketSound;
+    private AudioSource audioSource;
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     void Update()
     {
@@ -18,6 +24,7 @@ public class RocketController : MonoBehaviour
         {
             // Spawn the rocket prefab at the rocket spawn point
             GameObject rocket = Instantiate(rocketPrefab, rocketSpawnPoint.position, rocketSpawnPoint.rotation);
+            audioSource.PlayOneShot(rocketSound);
 
             // Get the rigidbody component of the rocket
             Rigidbody rb = rocket.GetComponent<Rigidbody>();
