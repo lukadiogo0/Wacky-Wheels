@@ -67,15 +67,13 @@ public class TrackCheckpoints : MonoBehaviour
             int nextCheckpointSingleIndex = checkpointSingleList.IndexOf(checkpointSingle);
             if (nextCheckpointSingleIndex == this.nextCheckpointSingleIndex)
             {
-                // Correct checkpoint
-                Debug.Log("Correct");
+                
 
                 this.nextCheckpointSingleIndex = (nextCheckpointSingleIndex + 1) % checkpointSingleList.Count;
             }
             else
             {
-                // Wrong checkpoint
-                Debug.Log("Wrong");
+                
             }
         }
     }

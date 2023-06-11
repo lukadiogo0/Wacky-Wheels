@@ -19,7 +19,6 @@ public class Rocket : MonoBehaviour
         col = GetComponent<Collider>();
         rb.useGravity = false;
         rb.velocity = transform.forward * speed;
-        Debug.Log("SPEED");
         Destroy(gameObject, lifetime);
     }
 
