@@ -14,15 +14,6 @@ public class Obstacle : MonoBehaviour
     public static bool obstacleHasBeenUsed = false;
     public static bool hasObstacle = false;
 
-    public AudioClip ObstacleSound;
-    private AudioSource audioSource;
-
-    void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-        audioSource.volume = 0.1f;
-    }
-
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift) && hasObstacle == true)
@@ -49,7 +40,6 @@ public class Obstacle : MonoBehaviour
     {
         currentObstacle = Instantiate(obstaclePrefab, spawnPoint.position, spawnPoint.rotation);
         Rigidbody rb = currentObstacle.GetComponent<Rigidbody>();
-        audioSource.PlayOneShot(ObstacleSound);
         isObstacleActive = true;
         obstacleHasBeenUsed = true;
         hasObstacle = false;

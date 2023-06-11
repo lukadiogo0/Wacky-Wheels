@@ -4,73 +4,28 @@ using UnityEngine;
 
 public class PlayerInputs : MonoBehaviour, IDecisions
 {
-
-    public AudioClip audioClipAccelerate;
-public AudioClip audioClipBrake;
-public AudioClip audioClipDrift;
-
-private AudioSource audioSource;
-private KartController kartController;
-
-
-private void Start()
-{
-    kartController = GetComponent<KartController>();
-    audioSource = GetComponent<AudioSource>();
-}
-
-public bool Accelerate()
-{
-    if (Input.GetAxis("Accelerate") > 0)
-    {
-        // Play the accelerate sound
-        if (!audioSource.isPlaying)
-        {
-            audioSource.clip = audioClipAccelerate;
-            audioSource.Play();
-        }
-
-        return true;
-    }
-
-    // Stop playing the accelerate sound
-    if (audioSource.isPlaying && audioSource.clip == audioClipAccelerate)
-    {
-        audioSource.Stop();
-    }
-
-    return false;
-}
-     public float Turn()
+    public float Turn()
     {
         return Input.GetAxis("Horizontal");
     }
 
-public bool Brake()
-{
-    
-        if (Input.GetAxis("Brake") > 0)
+    public bool Accelerate()
+    {
+        if(Input.GetAxis("Accelerate") > 0)
         {
-           
-            // Play the brake sound
-            if (!audioSource.isPlaying && kartController.CurrentSpeed > 0)
-             {
-                audioSource.clip = audioClipBrake;
-                audioSource.Play();
-            }
-            
             return true;
         }
+        return false;
+    }
 
-        // Stop playing the brake sound
-        if (audioSource.isPlaying && audioSource.clip == audioClipBrake)
+    public bool Brake()
+    {
+        if (Input.GetAxis("Brake") > 0)
         {
-            audioSource.Stop();
+            return true;
         }
-    
-
-    return false;
-}
+        return false;
+    }
 
     public bool DriftAnim()
     {

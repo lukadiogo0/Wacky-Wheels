@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< Updated upstream:Assets/Scenes/Level1.meta
-guid: c10336dece6766942b72123264035f1e
-========
-guid: 465cf2c79a76c9746aa08478302be088
->>>>>>>> Stashed changes:Assets/Sounds.meta
+guid: c195c633e7d9ffc468e3682db1f99f73
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

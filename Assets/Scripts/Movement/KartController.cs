@@ -49,14 +49,12 @@ public class KartController : MonoBehaviour
     public bool isSliding = false;
 
     private IDecisions decisions;
- 
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         decisions = GetComponent<IDecisions>();
-
     }
 
     // Update is called once per frame

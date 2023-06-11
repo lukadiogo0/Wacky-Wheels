@@ -12,22 +12,16 @@ public class ItemBox : MonoBehaviour
     public Sprite defaultSprite;
 
     private bool canRespawn = true;
-    public AudioClip carouselSound;
-    private AudioSource audioSource;
-    void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
 
-    private IEnumerator OnTriggerEnter(Collider other)
+
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
             canRespawn = false; // disable respawn flag
             gameObject.GetComponent<MeshRenderer>().enabled = false; // hide the item box
             GetComponent<Collider>().enabled = false; // disable the collider
-            audioSource.PlayOneShot(carouselSound);
-            yield return new WaitForSeconds(3.5f);
+
             // choose a random item sprite
             int randomIndex = Random.Range(0, ItemSprites.Count);
 
