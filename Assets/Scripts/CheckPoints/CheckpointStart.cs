@@ -8,16 +8,19 @@ public class CheckpointStart : MonoBehaviour
     public bool hasPassHalf = false;
     public CheckpointHalfLap half;
 
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider other)
     {
-        if (hasPassHalf)
+        if (other.TryGetComponent<KartController>(out KartController kart))
         {
-            LapTimeManager.MinuteCount = 0;
-            LapTimeManager.SecondCount = 0;
-            LapTimeManager.MiliSecondCount = 0;
+            if (hasPassHalf)
+            {
+                LapTimeManager.MinuteCount = 0;
+                LapTimeManager.SecondCount = 0;
+                LapTimeManager.MiliSecondCount = 0;
 
-            half.hasPassStart = true;
-            hasPassHalf = false;
+                half.hasPassStart = true;
+                hasPassHalf = false;
+            }
         }
     }
 }

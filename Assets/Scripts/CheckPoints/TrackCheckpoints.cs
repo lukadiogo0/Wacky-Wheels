@@ -25,13 +25,14 @@ public class TrackCheckpoints : MonoBehaviour
         Transform checkpointsTransform = transform.Find("Checkpoints");
 
         checkpointSingleList = new List<CheckpointSingle>();
+        checkpointSingleTransforms = new List<Transform>();
         foreach (Transform checkpointSingleTransform in checkpointsTransform)
         {
             CheckpointSingle checkpointSingle = checkpointSingleTransform.GetComponent<CheckpointSingle>();
 
             checkpointSingle.SetTrackCheckpoints(this);
-
             checkpointSingleList.Add(checkpointSingle);
+            checkpointSingleTransforms.Add(checkpointSingleTransform);
         }
 
         nextCheckpointSingleIndexList = new List<int>();
@@ -105,23 +106,10 @@ public class TrackCheckpoints : MonoBehaviour
     public Transform GetNextCheckpoint(Transform carTransform)
     {
         Transform nextCheckpointTransform = null;
-
         int nextCheckpointIndex = nextCheckpointSingleIndexList[carTransformList.IndexOf(carTransform)];
-        if(nextCheckpointIndex != -1) { 
+        if (nextCheckpointIndex != -1) { 
             nextCheckpointTransform = checkpointSingleTransforms[nextCheckpointIndex];
         }
-        /*float closestDistance = Mathf.Infinity;
-
-        // Itera pelos checkpoints para encontrar o mais próximo da posição atual
-        foreach (Transform checkpoint in checkpoints)
-        {
-            float distance = Vector3.Distance(currentPosition.position, checkpoint.position);
-            if (distance < closestDistance)
-            {
-                closestDistance = distance;
-                nextCheckpoint = checkpoint;
-            }
-        }*/
         return nextCheckpointTransform;
     }
 

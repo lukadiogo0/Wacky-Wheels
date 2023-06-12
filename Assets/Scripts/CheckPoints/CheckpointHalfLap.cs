@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CheckpointHalfLap : MonoBehaviour
 {
-    public bool hasPassStart = false;
+    public bool hasPassStart = true;
     public CheckpointStart start;
 
     private void Start()
@@ -12,11 +12,13 @@ public class CheckpointHalfLap : MonoBehaviour
         hasPassStart = true;
     }
 
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider other)
     {
-        if (hasPassStart) {
-            hasPassStart = false;
-            start.hasPassHalf = true;
+        if (other.TryGetComponent<KartController>(out KartController kart)){ 
+           if (hasPassStart) {
+                hasPassStart = false;
+                start.hasPassHalf = true;
+            }
         }
     }
 }

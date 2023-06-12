@@ -6,6 +6,8 @@ public class NavMesh : MonoBehaviour
     [SerializeField] private Transform[] waypoints; // Array of all the waypoints in the desired order
     private int currentWaypointIndex = 0; // Current index of the waypoint the AI is moving towards
     private NavMeshAgent navMeshAgent;
+    private bool canMove = false;
+
 
     void Awake()
     {
@@ -26,19 +28,40 @@ public class NavMesh : MonoBehaviour
         }
         else
         {
-            // AI has reached the final waypoint or there are no waypoints left
-            // You can handle this condition according to your game's logic
+            currentWaypointIndex = 0;
+            navMeshAgent.SetDestination(waypoints[currentWaypointIndex].position);
         }
+
+        
+    }
+
+    public void SetCanMove(bool canMove)
+    {
+        this.canMove = canMove;
     }
 
     void Update()
     {
-        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+        if (canMove)
         {
-            if (!navMeshAgent.pathPending)
+            navMeshAgent.enabled = true;
+            navMeshAgent.isStopped = false;
+            if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
             {
-                SetNextWaypoint();
+                if (!navMeshAgent.pathPending)
+                {
+                    SetNextWaypoint();
+                }
             }
         }
+        else
+        {
+            navMeshAgent.enabled = false;
+            //navMeshAgent.isStopped = true;
+            //navMeshAgent.velocity = Vector3.zero;
+        }
+
+        
+        
     }
 }

@@ -52,6 +52,7 @@ public class KartController : MonoBehaviour
     public float BoostTime = 0;
     [HideInInspector]
     public bool isSliding = false;
+    private bool canMove = false;
 
     // Start is called before the first frame update
     void Awake()
@@ -62,11 +63,13 @@ public class KartController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        move();
-        tireSteer();
-        steer();
-        groundNormalRotation();
-        boosts();
+        if (canMove) { 
+            move();
+            tireSteer();
+            steer();
+            groundNormalRotation();
+            boosts();
+        }
     }
 
     private void move()
@@ -358,5 +361,10 @@ public class KartController : MonoBehaviour
         this.turnAmount = turnAmount;
         this.isSpacePressed = isSpacePressed;
         this.isSpaceStillPressed = isSpaceStillPressed;
+    }
+
+    public void SetCanMove(bool canMove)
+    {
+        this.canMove = canMove;
     }
 }
