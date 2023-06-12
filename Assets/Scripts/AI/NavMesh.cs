@@ -45,7 +45,6 @@ public class NavMesh : MonoBehaviour
         if (canMove)
         {
             navMeshAgent.enabled = true;
-            navMeshAgent.isStopped = false;
             if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
             {
                 if (!navMeshAgent.pathPending)
@@ -57,11 +56,6 @@ public class NavMesh : MonoBehaviour
         else
         {
             navMeshAgent.enabled = false;
-            //navMeshAgent.isStopped = true;
-            //navMeshAgent.velocity = Vector3.zero;
         }
-
-        
-        
     }
 }

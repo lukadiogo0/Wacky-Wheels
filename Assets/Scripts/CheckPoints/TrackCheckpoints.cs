@@ -42,7 +42,7 @@ public class TrackCheckpoints : MonoBehaviour
         }
     }
 
-    private void Update()
+    /*private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && !isCooldown)
         {
@@ -65,7 +65,7 @@ public class TrackCheckpoints : MonoBehaviour
                 Debug.Log("Passed Checkpoint: " + checkpointSingleList[previousCheckpointIndex].name);
             }
         }
-    }
+    }*/
 
     private IEnumerator StartCooldown()
     {
@@ -73,7 +73,6 @@ public class TrackCheckpoints : MonoBehaviour
         yield return new WaitForSeconds(1f); // Cooldown duration in seconds
         isCooldown = false;
     }
-
 
     public void CarThroughCheckpoint(CheckpointSingle checkpointSingle, Transform carTransform)
     {

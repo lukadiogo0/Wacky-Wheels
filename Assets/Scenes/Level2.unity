@@ -41894,6 +41894,10 @@ MonoBehaviour:
   drift3: {r: 1, g: 0, b: 0.8980392, a: 1}
   BoostTime: 0
   isSliding: 0
+  audioClipAccelerate: {fileID: 8300000, guid: 25062321e4597a34fb2f93aac6ad042b, type: 3}
+  audioClipBrake: {fileID: 8300000, guid: 64c083fcb5ac98545aacd7465b351275, type: 3}
+  audioClipDrift: {fileID: 8300000, guid: 0237e29e405d7504495b6d951c6df7f2, type: 3}
+  audioClipIdle: {fileID: 8300000, guid: 6b09c3e2673b29c498434fa1da9028fb, type: 3}
 --- !u!135 &1497494727
 SphereCollider:
   m_ObjectHideFlags: 0

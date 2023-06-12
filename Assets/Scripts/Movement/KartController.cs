@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.AI;
 
 public class KartController : MonoBehaviour
 {
@@ -56,20 +57,20 @@ public class KartController : MonoBehaviour
     public AudioClip audioClipBrake;
     public AudioClip audioClipDrift;
     public AudioClip audioClipIdle;
-
-
     private AudioSource audioSource;
 
-    private void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
+    private NavMesh navMesh;
+    private NavMeshAgent navMeshAgent;
+
     private bool canMove = false;
 
     // Start is called before the first frame update
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
+        navMesh = GetComponent<NavMesh>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame

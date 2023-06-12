@@ -29,7 +29,7 @@ public class ItemBox : MonoBehaviour
             audioSource.PlayOneShot(carouselSound);
             yield return new WaitForSeconds(3.5f);
             // choose a random item sprite
-            int randomIndex = Random.Range(3, 3);
+            int randomIndex = Random.Range(0, ItemSprites.Count);
 
             // get the item display child object
             GameObject itemDisplay = ItemDisplayObject.transform.Find("ItemDisplay").gameObject;
