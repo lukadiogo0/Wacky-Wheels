@@ -11,6 +11,7 @@ TagManager:
   - PowerUp
   - Ground
   - Checkpoint
+  - Game Music
   layers:
   - Default
   - TransparentFX

@@ -27,6 +27,7 @@ public bool Accelerate()
         if (!audioSource.isPlaying && kartController.CurrentSpeed > 0)
         {
             audioSource.clip = audioClipAccelerate;
+            audioSource.volume = 0.05f;
             audioSource.Play();
         }
 
