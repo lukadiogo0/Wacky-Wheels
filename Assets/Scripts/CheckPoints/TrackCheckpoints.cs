@@ -10,10 +10,13 @@ public class TrackCheckpoints : MonoBehaviour
     public event EventHandler<CarCheckPointEventArgs> OnCarWrongCheckpoint;
 
     [SerializeField] private List<Transform> carTransformList;
+    [SerializeField] private Transform playerCarTransform;
 
     private List<CheckpointSingle> checkpointSingleList;
     private List<Transform> checkpointSingleTransforms;
     private List<int> nextCheckpointSingleIndexList;
+    private int nextCheckpointSingleIndex;
+    private bool isCooldown;
 
     public Transform checkpoints;
 
@@ -36,6 +39,38 @@ public class TrackCheckpoints : MonoBehaviour
         {
             nextCheckpointSingleIndexList.Add(0);
         }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && !isCooldown)
+        {
+            int previousCheckpointIndex = (nextCheckpointSingleIndex - 1 + checkpointSingleList.Count) % checkpointSingleList.Count;
+            int currentCheckpointIndex = (nextCheckpointSingleIndex + checkpointSingleList.Count) % checkpointSingleList.Count;
+
+            if (currentCheckpointIndex != previousCheckpointIndex)
+            {
+                StartCoroutine(StartCooldown());
+
+                Transform previousCheckpointTransform = checkpointSingleList[previousCheckpointIndex].transform;
+                Vector3 spawnPosition = previousCheckpointTransform.position;
+                Quaternion spawnRotation = Quaternion.LookRotation(-previousCheckpointTransform.right); // Look in the opposite direction along the X-axis
+
+                playerCarTransform.position = spawnPosition;
+                playerCarTransform.rotation = spawnRotation;
+
+                nextCheckpointSingleIndex = previousCheckpointIndex;
+
+                Debug.Log("Passed Checkpoint: " + checkpointSingleList[previousCheckpointIndex].name);
+            }
+        }
+    }
+
+    private IEnumerator StartCooldown()
+    {
+        isCooldown = true;
+        yield return new WaitForSeconds(1f); // Cooldown duration in seconds
+        isCooldown = false;
     }
 
 
