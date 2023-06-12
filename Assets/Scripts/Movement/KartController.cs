@@ -75,12 +75,14 @@ public class KartController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        move();
-        sound();
-        tireSteer();
-        steer();
-        groundNormalRotation();
-        boosts();
+        if (canMove) { 
+            move();
+            sound();
+            tireSteer();
+            steer();
+            groundNormalRotation();
+            boosts();
+        }
     }
     private void sound(){
         if (!audioSource.isPlaying && CurrentSpeed < 1 && CurrentSpeed > -1){

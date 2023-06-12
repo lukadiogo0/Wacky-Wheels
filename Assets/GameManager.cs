@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour
     void FixedUpdate()
     {
        vehicleSpeed = kartController.CurrentSpeed;
+       if(vehicleSpeed < 0)
+        {
+            vehicleSpeed = 0;
+        }
        updateNeedle();
     }
     public void updateNeedle(){

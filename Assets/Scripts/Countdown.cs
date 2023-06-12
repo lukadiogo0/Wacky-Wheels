@@ -48,6 +48,5 @@ public class Countdown : MonoBehaviour
         }
 
         LapTimer.SetActive(true);
-        
     }
 }
