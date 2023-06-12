@@ -8043,7 +8043,6 @@ GameObject:
   - component: {fileID: 201383111}
   - component: {fileID: 201383114}
   - component: {fileID: 201383113}
-  - component: {fileID: 201383112}
   m_Layer: 5
   m_Name: LoseUI
   m_TagString: Untagged
@@ -8071,27 +8070,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -92}
   m_SizeDelta: {x: 279.4754, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &201383112
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 201383110}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f4f42e958999f54458de3520e657c78e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &201383113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20328,8 +20306,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 48.095, y: 24.168007}
-  m_SizeDelta: {x: 72.2412, y: 50}
+  m_AnchoredPosition: {x: 50.674, y: 24.168}
+  m_SizeDelta: {x: 101.3481, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &456970499
 MonoBehaviour:
@@ -27951,7 +27929,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 48.095, y: 73.568}
+  m_AnchoredPosition: {x: 65.227, y: 73.568}
   m_SizeDelta: {x: 72.2412, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &630017809
@@ -65257,7 +65235,6 @@ GameObject:
   - component: {fileID: 1338969823}
   - component: {fileID: 1338969826}
   - component: {fileID: 1338969825}
-  - component: {fileID: 1338969824}
   m_Layer: 5
   m_Name: FinalPositionUI
   m_TagString: Untagged
@@ -65285,27 +65262,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 494.3848, y: 215.1911}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1338969824
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1338969822}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f4f42e958999f54458de3520e657c78e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1338969825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70729,7 +70685,7 @@ MonoBehaviour:
   audioClipDrift: {fileID: 8300000, guid: 0237e29e405d7504495b6d951c6df7f2, type: 3}
   audioClipIdle: {fileID: 8300000, guid: 6b09c3e2673b29c498434fa1da9028fb, type: 3}
   positionDisplay: {fileID: 456970497}
-  InicialPosition: 3
+  InicialPosition: 10
   position: 0
   LapsDone: 0
   hasPassHalf: 0
@@ -89618,7 +89574,6 @@ GameObject:
   - component: {fileID: 1864094348}
   - component: {fileID: 1864094351}
   - component: {fileID: 1864094350}
-  - component: {fileID: 1864094349}
   m_Layer: 5
   m_Name: WinUI
   m_TagString: Untagged
@@ -89646,27 +89601,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -92}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1864094349
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1864094347}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f4f42e958999f54458de3520e657c78e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1864094350
 MonoBehaviour:
   m_ObjectHideFlags: 0
