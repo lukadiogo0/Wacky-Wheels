@@ -9,10 +9,15 @@ public class Shrink : MonoBehaviour
     public float distanceFromGround = 1.5f;
 
     private Rigidbody rb;
+    public AudioClip shrinkSound2;
+    private AudioSource audioSource;
+    
+    
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
         rb.velocity = transform.forward * speed;
         Destroy(gameObject, lifetime);
     }
@@ -34,6 +39,7 @@ public class Shrink : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
+            audioSource.PlayOneShot(shrinkSound2);
             ShrinkEnemy(other.gameObject);
             Destroy(gameObject);
         }
@@ -55,4 +61,5 @@ public class Shrink : MonoBehaviour
         ShrinkTimer timer = enemy.AddComponent<ShrinkTimer>();
         timer.ResetTimer(shrinkDuration, initialScale, enemyRigidbody, initialVelocity, shrinkAmount);
     }
+    
 }

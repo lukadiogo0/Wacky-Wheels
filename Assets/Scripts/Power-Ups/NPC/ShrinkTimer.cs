@@ -7,6 +7,7 @@ public class ShrinkTimer : MonoBehaviour
     private Rigidbody enemyRigidbody; // Reference to the enemy's rigidbody
     private Vector3 initialVelocity; // The initial velocity of the enemy
     private float shrinkAmount; // The amount by which the enemy shrinks
+  
 
     public void ResetTimer(float duration, Vector3 initialScale, Rigidbody enemyRigidbody, Vector3 initialVelocity, float shrinkAmount)
     {
@@ -19,12 +20,15 @@ public class ShrinkTimer : MonoBehaviour
 
     void Update()
     {
+        
         if (timer > 0f)
         {
+            
             timer -= Time.deltaTime;
 
             if (timer <= 0f)
             {
+                  
                 // Restore the enemy's scale and speed by adding back what was taken out
                 Vector3 restoredScale = initialScale + (initialScale * 2 * shrinkAmount);
                 transform.localScale = restoredScale;

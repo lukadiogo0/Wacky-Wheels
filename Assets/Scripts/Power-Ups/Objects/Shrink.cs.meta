@@ -3,7 +3,8 @@ guid: f974463ef0e5e5c438bd9e951afc6bf6
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - shrinkSound2: {fileID: 8300000, guid: 0a78fd91cfafc6949a6a4d0ac26b33d4, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

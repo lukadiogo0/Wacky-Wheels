@@ -23,6 +23,7 @@ public class Countdown : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         CountDown.GetComponent<TextMeshProUGUI>().text = "3";
+        CountDownAudio.volume = 0.2f;
         CountDownAudio.Play();
         CountDown.SetActive(true);
         yield return new WaitForSeconds(1);

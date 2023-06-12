@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1121,7 +1121,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carTransformList: []
-  playerCarTransform: {fileID: 445302014}
   checkpoints: {fileID: 0}
 --- !u!4 &34490584
 Transform:
@@ -5780,7 +5779,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kartController: {fileID: 445302011}
-  needle: {fileID: 0}
+  needle: {fileID: 2116822148}
   vehicleSpeed: 0
 --- !u!4 &180365111
 Transform:
@@ -13499,6 +13498,10 @@ MonoBehaviour:
   drift3: {r: 1, g: 0, b: 0.8980392, a: 1}
   BoostTime: 0
   isSliding: 0
+  audioClipAccelerate: {fileID: 0}
+  audioClipBrake: {fileID: 0}
+  audioClipDrift: {fileID: 0}
+  audioClipIdle: {fileID: 0}
 --- !u!135 &445302012
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -15783,9 +15786,8 @@ RectTransform:
   - {fileID: 1486273723}
   - {fileID: 1301967785}
   - {fileID: 1758032732}
-  - {fileID: 1862701784}
   m_Father: {fileID: 1387193508}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -42591,6 +42593,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1862701784}
   - {fileID: 521520049}
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -57400,12 +57403,12 @@ RectTransform:
   m_Children:
   - {fileID: 2116822149}
   - {fileID: 1822479397}
-  m_Father: {fileID: 521520049}
-  m_RootOrder: 5
+  m_Father: {fileID: 1387193508}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -59.599976, y: -112.100006}
+  m_AnchoredPosition: {x: -55.1, y: 48}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1863275730 stripped

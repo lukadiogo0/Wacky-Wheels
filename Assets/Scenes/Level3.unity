@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7967,6 +7967,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1837574994}
   - {fileID: 860327247}
   m_Father: {fileID: 0}
   m_RootOrder: 5
@@ -8192,7 +8193,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kartController: {fileID: 1661972385}
-  needle: {fileID: 0}
+  needle: {fileID: 1098996869}
   vehicleSpeed: 0
 --- !u!4 &172145647
 Transform:
@@ -39560,9 +39561,8 @@ RectTransform:
   - {fileID: 1953777582}
   - {fileID: 1971761640}
   - {fileID: 706270147}
-  - {fileID: 1837574994}
   m_Father: {fileID: 166863159}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -73724,7 +73724,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carTransformList: []
-  playerCarTransform: {fileID: 1661972388}
   checkpoints: {fileID: 0}
 --- !u!1001 &1617479697
 PrefabInstance:
@@ -76575,6 +76574,10 @@ MonoBehaviour:
   drift3: {r: 1, g: 0, b: 0.8980392, a: 1}
   BoostTime: 0
   isSliding: 0
+  audioClipAccelerate: {fileID: 0}
+  audioClipBrake: {fileID: 0}
+  audioClipDrift: {fileID: 0}
+  audioClipIdle: {fileID: 0}
 --- !u!135 &1661972386
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -85286,12 +85289,12 @@ RectTransform:
   m_Children:
   - {fileID: 1098996870}
   - {fileID: 1189665100}
-  m_Father: {fileID: 860327247}
-  m_RootOrder: 5
+  m_Father: {fileID: 166863159}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -59.599976, y: -112.100006}
+  m_AnchoredPosition: {x: -58, y: 50.2}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1838173945

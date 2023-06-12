@@ -52,6 +52,18 @@ public class KartController : MonoBehaviour
     public float BoostTime = 0;
     [HideInInspector]
     public bool isSliding = false;
+    public AudioClip audioClipAccelerate;
+    public AudioClip audioClipBrake;
+    public AudioClip audioClipDrift;
+    public AudioClip audioClipIdle;
+
+
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     private bool canMove = false;
 
     // Start is called before the first frame update
@@ -63,15 +75,54 @@ public class KartController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (canMove) { 
-            move();
-            tireSteer();
-            steer();
-            groundNormalRotation();
-            boosts();
-        }
+        move();
+        sound();
+        tireSteer();
+        steer();
+        groundNormalRotation();
+        boosts();
     }
+    private void sound(){
+        if (!audioSource.isPlaying && CurrentSpeed < 1 && CurrentSpeed > -1){
+            audioSource.clip = audioClipIdle;
+            audioSource.volume = 0.05f;
+            audioSource.Play();
+        }else if(audioSource.isPlaying && audioSource.clip == audioClipIdle && CurrentSpeed > 1){
+            audioSource.Stop();
+        }else if(audioSource.isPlaying && audioSource.clip == audioClipIdle && CurrentSpeed < 0){
+            audioSource.Stop();
+        }
 
+        if (audioSource.isPlaying && audioSource.clip == audioClipAccelerate && CurrentSpeed < 2)
+        {
+            audioSource.Stop();
+        }
+        if (isAccelerating)
+        {
+            if (!audioSource.isPlaying && CurrentSpeed > 0)
+            {
+                audioSource.clip = audioClipAccelerate;
+                audioSource.volume = 0.05f;
+                audioSource.Play();
+            }
+        }
+        else if (isBraking)
+        {
+            if (audioSource.isPlaying && CurrentSpeed > 0 && audioSource.clip == audioClipAccelerate)
+            {
+                audioSource.Stop();
+            }
+            if (!audioSource.isPlaying && CurrentSpeed > 0)
+            {
+                audioSource.clip = audioClipBrake;
+                audioSource.Play();
+            }
+            
+        }
+        
+        
+
+    }
     private void move()
     {
         RealSpeed = transform.InverseTransformDirection(rb.velocity).z; //real velocity before setting the value. This can be useful if say you want to have hair moving on the player, but don't want it to move if you are accelerating into a wall, since checking velocity after it has been applied will always be the applied value, and not real
