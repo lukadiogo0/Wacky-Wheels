@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInputs : MonoBehaviour, IDecisions
+/*public class PlayerInputs : MonoBehaviour, IDecisions
 {
 
     public AudioClip audioClipAccelerate;
@@ -90,4 +90,30 @@ public bool Brake()
         }
         return false;
     }
+}*/
+
+public class PlayerInputs: MonoBehaviour
+{
+    private KartController kartController;
+    /*public AudioClip audioClipAccelerate;
+    public AudioClip audioClipBrake;
+    public AudioClip audioClipDrift;
+    private AudioSource audioSource;*/
+
+
+    private void Awake()
+    {
+        kartController = GetComponent<KartController>();
+        //audioSource = GetComponent<AudioSource>();
+    }
+
+    private void Update() {
+        bool isAccelerating = Input.GetAxisRaw("Accelerate") > 0 ? true : false;
+        bool isBraking = Input.GetAxisRaw("Brake") > 0 ? true : false;
+        float turnAmount = Input.GetAxisRaw("Horizontal");
+        bool isSpacePressed = Input.GetButtonDown("Drift");
+        bool isSpaceStillPressed = Input.GetButton("Drift");
+        kartController.SetInputs(isAccelerating, isBraking, turnAmount, isSpacePressed, isSpaceStillPressed);
+    }
+
 }

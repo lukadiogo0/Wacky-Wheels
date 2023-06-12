@@ -5,10 +5,17 @@ using UnityEngine;
 
 public class TrackCheckpoints : MonoBehaviour
 {
-    [SerializeField] private Transform playerCarTransform;
+
+    public event EventHandler<CarCheckPointEventArgs> OnCarCorrectCheckpoint;
+    public event EventHandler<CarCheckPointEventArgs> OnCarWrongCheckpoint;
+
+    [SerializeField] private List<Transform> carTransformList;
+
     private List<CheckpointSingle> checkpointSingleList;
-    private int nextCheckpointSingleIndex;
-    private bool isCooldown;
+    private List<Transform> checkpointSingleTransforms;
+    private List<int> nextCheckpointSingleIndexList;
+
+    public Transform checkpoints;
 
     private void Awake()
     {
@@ -24,57 +31,91 @@ public class TrackCheckpoints : MonoBehaviour
             checkpointSingleList.Add(checkpointSingle);
         }
 
-        nextCheckpointSingleIndex = 0;
-        isCooldown = false;
+        nextCheckpointSingleIndexList = new List<int>();
+        foreach (Transform carTransform in carTransformList)
+        {
+            nextCheckpointSingleIndexList.Add(0);
+        }
     }
 
-    private void Update()
+
+    public void CarThroughCheckpoint(CheckpointSingle checkpointSingle, Transform carTransform)
     {
-        if (Input.GetKeyDown(KeyCode.E) && !isCooldown)
+        int nextCheckpointSingleIndex = nextCheckpointSingleIndexList[carTransformList.IndexOf(carTransform)];
+        if (checkpointSingleList.IndexOf(checkpointSingle) == nextCheckpointSingleIndex)
         {
-            int previousCheckpointIndex = (nextCheckpointSingleIndex - 1 + checkpointSingleList.Count) % checkpointSingleList.Count;
-            int currentCheckpointIndex = (nextCheckpointSingleIndex + checkpointSingleList.Count) % checkpointSingleList.Count;
-
-            if (currentCheckpointIndex != previousCheckpointIndex)
+            // Correct checkpoint
+            if (OnCarCorrectCheckpoint != null)
             {
-                StartCoroutine(StartCooldown());
-
-                Transform previousCheckpointTransform = checkpointSingleList[previousCheckpointIndex].transform;
-                Vector3 spawnPosition = previousCheckpointTransform.position;
-                Quaternion spawnRotation = Quaternion.LookRotation(-previousCheckpointTransform.right); // Look in the opposite direction along the X-axis
-
-                playerCarTransform.position = spawnPosition;
-                playerCarTransform.rotation = spawnRotation;
-
-                nextCheckpointSingleIndex = previousCheckpointIndex;
-
-                Debug.Log("Passed Checkpoint: " + checkpointSingleList[previousCheckpointIndex].name);
+                CarCheckPointEventArgs args = new CarCheckPointEventArgs(carTransform);
+                
+                OnCarCorrectCheckpoint.Invoke(this, args);
+            }
+            Debug.Log("Correct Checkpoint");
+            nextCheckpointSingleIndexList[carTransformList.IndexOf(carTransform)]
+                = (nextCheckpointSingleIndex + 1) % checkpointSingleList.Count;
+        }
+        else
+        {
+            Debug.Log("Wrong Checkpoint");
+            // Wrong checkpoint
+            if (OnCarWrongCheckpoint != null)
+            {
+                CarCheckPointEventArgs args = new CarCheckPointEventArgs(carTransform);
+                OnCarWrongCheckpoint.Invoke(this, args);
             }
         }
     }
 
-    private IEnumerator StartCooldown()
+    public Transform GetNextCheckpoint(Transform carTransform)
     {
-        isCooldown = true;
-        yield return new WaitForSeconds(1f); // Cooldown duration in seconds
-        isCooldown = false;
+        Transform nextCheckpointTransform = null;
+
+        int nextCheckpointIndex = nextCheckpointSingleIndexList[carTransformList.IndexOf(carTransform)];
+        if(nextCheckpointIndex != -1) { 
+            nextCheckpointTransform = checkpointSingleTransforms[nextCheckpointIndex];
+        }
+        /*float closestDistance = Mathf.Infinity;
+
+        // Itera pelos checkpoints para encontrar o mais próximo da posição atual
+        foreach (Transform checkpoint in checkpoints)
+        {
+            float distance = Vector3.Distance(currentPosition.position, checkpoint.position);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                nextCheckpoint = checkpoint;
+            }
+        }*/
+        return nextCheckpointTransform;
     }
 
-    public void CarThroughCheckpoint(CheckpointSingle checkpointSingle, Transform carTransform)
+    public void ResetCheckpoint(Transform carTransform)
     {
-        if (carTransform == playerCarTransform)
+        int carIndex = carTransformList.IndexOf(carTransform);
+        if (carIndex != -1)
         {
-            int nextCheckpointSingleIndex = checkpointSingleList.IndexOf(checkpointSingle);
-            if (nextCheckpointSingleIndex == this.nextCheckpointSingleIndex)
-            {
-                
+            nextCheckpointSingleIndexList[carIndex] = 0;
+        }
+    }
 
-                this.nextCheckpointSingleIndex = (nextCheckpointSingleIndex + 1) % checkpointSingleList.Count;
-            }
-            else
-            {
-                
-            }
+    public int FindCheckpointIndex(Transform carTransform)
+    {
+        int carIndex = carTransformList.IndexOf(carTransform);
+        if (carIndex != -1)
+        {
+            return nextCheckpointSingleIndexList[carIndex];
+        }
+        return -1;
+    }
+
+    public class CarCheckPointEventArgs : EventArgs
+    {
+        public Transform carTransform;
+
+        public CarCheckPointEventArgs(Transform carTransform)
+        {
+            this.carTransform = carTransform;
         }
     }
 }

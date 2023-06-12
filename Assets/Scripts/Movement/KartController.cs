@@ -5,13 +5,18 @@ using UnityEngine.UI;
 
 public class KartController : MonoBehaviour
 {
-    private Rigidbody rb;
+    public Rigidbody rb;
     public float offsety;
 
     public float CurrentSpeed = 0;
     public float MaxSpeed;
     public float boostSpeed;
     private float RealSpeed; //not the applied speed
+    private bool isAccelerating = false;
+    private bool isBraking = false;
+    private float turnAmount = 0f;
+    private bool isSpacePressed = false;
+    private bool isSpaceStillPressed = false;
 
     [Header("Tires")]
     public Transform frontLeftTire;
@@ -48,15 +53,10 @@ public class KartController : MonoBehaviour
     [HideInInspector]
     public bool isSliding = false;
 
-    private IDecisions decisions;
- 
-
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        decisions = GetComponent<IDecisions>();
-
     }
 
     // Update is called once per frame
@@ -73,11 +73,11 @@ public class KartController : MonoBehaviour
     {
         RealSpeed = transform.InverseTransformDirection(rb.velocity).z; //real velocity before setting the value. This can be useful if say you want to have hair moving on the player, but don't want it to move if you are accelerating into a wall, since checking velocity after it has been applied will always be the applied value, and not real
 
-        if (decisions.Accelerate())
+        if (isAccelerating)
         {
             CurrentSpeed = Mathf.Lerp(CurrentSpeed, MaxSpeed, Time.deltaTime * 0.5f); //speed
         }
-        else if (decisions.Brake())
+        else if (isBraking)
         {
             CurrentSpeed = Mathf.Lerp(CurrentSpeed, -MaxSpeed / 1.75f, 1f * Time.deltaTime);
         }
@@ -98,14 +98,14 @@ public class KartController : MonoBehaviour
 
     private void steer()
     {
-        steerDirection = decisions.Turn(); // -1, 0, 1
+        steerDirection = turnAmount; // -1, 0, 1
         Vector3 steerDirVect; //this is used for the final rotation of the kart for steering
 
         float steerAmount;
 
         if (driftLeft && !driftRight)
         {
-            steerDirection = decisions.Turn() < 0 ? -1.5f : -0.5f;
+            steerDirection = turnAmount < 0 ? -1.5f : -0.5f;
             transform.GetChild(0).localRotation = Quaternion.Lerp(transform.GetChild(0).localRotation, Quaternion.Euler(0, -20f, 0), 8f * Time.deltaTime);
 
 
@@ -114,7 +114,7 @@ public class KartController : MonoBehaviour
         }
         else if (driftRight && !driftLeft)
         {
-            steerDirection = decisions.Turn() > 0 ? 1.5f : 0.5f;
+            steerDirection = turnAmount > 0 ? 1.5f : 0.5f;
             transform.GetChild(0).localRotation = Quaternion.Lerp(transform.GetChild(0).localRotation, Quaternion.Euler(0, 20f, 0), 8f * Time.deltaTime);
 
             if (isSliding && touchingGround)
@@ -150,7 +150,7 @@ public class KartController : MonoBehaviour
 
     private void drift()
     {
-        if (decisions.DriftAnim() && touchingGround && CurrentSpeed > 40 && steerDirection != 0)
+        if (isSpacePressed && touchingGround && CurrentSpeed > 40 && steerDirection != 0)
         {
             transform.GetChild(0).GetComponent<Animator>().SetTrigger("DriftHop");
             if (steerDirection > 0)
@@ -165,7 +165,7 @@ public class KartController : MonoBehaviour
             }
         }
 
-        if (decisions.Drift() && touchingGround && CurrentSpeed > 40 && isSliding)
+        if (isSpaceStillPressed && touchingGround && CurrentSpeed > 40 && isSliding)
         {
             driftTime += Time.deltaTime;
 
@@ -224,7 +224,7 @@ public class KartController : MonoBehaviour
             }
         }
 
-        if (!decisions.Drift() || RealSpeed < 40)
+        if (!isSpaceStillPressed || RealSpeed < 40)
         {
             driftLeft = false;
             driftRight = false;
@@ -276,7 +276,7 @@ public class KartController : MonoBehaviour
 
     private void tireSteer()
     {
-        float horizontalInput = decisions.Turn();
+        float horizontalInput = turnAmount;
 
         if (!isRotating)
         {
@@ -337,5 +337,26 @@ public class KartController : MonoBehaviour
     private void Update()
     {
         drift();
+    }
+
+    public void StopCompletely()
+    {
+        CurrentSpeed = 0;
+        RealSpeed = 0;
+        steerDirection = 0;
+        isAccelerating = false;
+        isBraking = false;
+        turnAmount = 0f;
+        isSpacePressed = false;
+        isSpaceStillPressed = false;
+}
+
+    public void SetInputs(bool isAccelerating, bool isBraking, float turnAmount, bool isSpacePressed, bool isSpaceStillPressed)
+    {
+        this.isAccelerating = isAccelerating;
+        this.isBraking = isBraking;
+        this.turnAmount = turnAmount;
+        this.isSpacePressed = isSpacePressed;
+        this.isSpaceStillPressed = isSpaceStillPressed;
     }
 }
