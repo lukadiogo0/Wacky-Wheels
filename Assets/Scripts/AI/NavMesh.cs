@@ -7,11 +7,16 @@ public class NavMesh : MonoBehaviour
     private int currentWaypointIndex = 0; // Current index of the waypoint the AI is moving towards
     private NavMeshAgent navMeshAgent;
     private bool canMove = false;
+    public int LapsDone;
+    public int InicialPosition;
 
+    public bool hasPassHalf;
+    public bool hasPassStart;
 
     void Awake()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
+        hasPassStart = true;
     }
 
     void Start()
@@ -38,6 +43,11 @@ public class NavMesh : MonoBehaviour
     public void SetCanMove(bool canMove)
     {
         this.canMove = canMove;
+    }
+
+    public void IncreaseLap()
+    {
+        LapsDone += 1;
     }
 
     void Update()

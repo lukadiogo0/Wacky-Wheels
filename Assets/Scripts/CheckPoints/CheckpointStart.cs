@@ -6,17 +6,15 @@ using TMPro;
 
 public class CheckpointStart : MonoBehaviour
 {
-    public bool hasPassHalf = false;
-    public CheckpointHalfLap half;
     public GameObject LapCounter;
-    public int LapsDone;
+    public KartController kart;
     public int MaxLaps;
 
     public GameObject RaceFinish;
 
     private void Update()
     {
-        if(LapsDone > MaxLaps)
+        if(kart.LapsDone + 1 > MaxLaps)
         {
             RaceFinish.SetActive(true);
         }
@@ -24,7 +22,7 @@ public class CheckpointStart : MonoBehaviour
 
     private void Start()
     {
-        string text = "" + LapsDone + "/" + MaxLaps;
+        string text = "" + 1 + "/" + MaxLaps;
         LapCounter.GetComponent<TextMeshProUGUI>().text = text;
     }
 
@@ -32,21 +30,30 @@ public class CheckpointStart : MonoBehaviour
     {
         if (other.TryGetComponent<KartController>(out KartController kart))
         {
-            if (hasPassHalf)
+            if (kart.hasPassHalf)
             {
-                LapsDone+=1;
+                kart.IncreaseLap();
                 LapTimeManager.MinuteCount = 0;
                 LapTimeManager.SecondCount = 0;
                 LapTimeManager.MiliSecondCount = 0;
 
-                half.hasPassStart = true;
-                hasPassHalf = false;
-                string text = "" + LapsDone + "/" + MaxLaps;
-                if(LapsDone >= MaxLaps)
+                kart.hasPassStart = true;
+                kart.hasPassHalf = false;
+                string text = "" + kart.LapsDone + "/" + MaxLaps;
+                if(kart.LapsDone + 1 >= MaxLaps)
                 {
                     text = "" + MaxLaps + "/" + MaxLaps;
                 }
                 LapCounter.GetComponent<TextMeshProUGUI>().text = text;
+            }
+        }
+
+        if (other.TryGetComponent<NavMesh>(out NavMesh bot))
+        {
+            if (bot.hasPassHalf) { 
+                bot.IncreaseLap();
+                bot.hasPassStart = true;
+                bot.hasPassHalf = false;
             }
         }
     }

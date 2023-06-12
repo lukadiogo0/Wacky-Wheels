@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.AI;
+using TMPro;
 
 public class KartController : MonoBehaviour
 {
@@ -58,19 +58,22 @@ public class KartController : MonoBehaviour
     public AudioClip audioClipDrift;
     public AudioClip audioClipIdle;
     private AudioSource audioSource;
-
-    private NavMesh navMesh;
-    private NavMeshAgent navMeshAgent;
-
+    public GameObject positionDisplay;
+    public int InicialPosition;
+    public int position;
+    public int LapsDone;
     private bool canMove = false;
+    public bool hasPassHalf;
+    public bool hasPassStart;
 
     // Start is called before the first frame update
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
         audioSource = GetComponent<AudioSource>();
-        navMesh = GetComponent<NavMesh>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        position = InicialPosition;
+        positionDisplay.GetComponent<TextMeshProUGUI>().text = "" + position +"/"+InicialPosition;
+        hasPassStart = true;
     }
 
     // Update is called once per frame
@@ -420,5 +423,24 @@ public class KartController : MonoBehaviour
     public void SetCanMove(bool canMove)
     {
         this.canMove = canMove;
+    }
+
+    public int GetPlayerPos()
+    {
+        return position;
+    }
+
+    public void IncreasePlayerPos()
+    {
+        position += 1;
+    }
+
+    public void DecreasePlayerPos()
+    {
+        position -= 1;
+    }
+    public void IncreaseLap()
+    {
+        LapsDone += 1;
     }
 }
