@@ -6,7 +6,7 @@ using Unity.Services.Authentication;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class WackyGameMultiplayer : MonoBehaviour
+public class WackyGameMultiplayer : NetworkBehaviour
 {
     public const int MAX_PLAYER_AMOUNT = 4;
     private const string PLAYER_PREFS_PLAYER_NAME_MULTIPLAYER = "PlayerNameMultiplayer";
@@ -100,7 +100,7 @@ public class WackyGameMultiplayer : MonoBehaviour
 
     private void NetworkManager_ConnectionApprovalCallback(NetworkManager.ConnectionApprovalRequest connectionApprovalRequest, NetworkManager.ConnectionApprovalResponse connectionApprovalResponse)
     {
-        if (SceneManager.GetActiveScene().name != Loader.Scene.CharacterSelectScene.ToString())
+        if (SceneManager.GetActiveScene().name != Loader.Scene.CarSelectScene.ToString())
         {
             connectionApprovalResponse.Approved = false;
             connectionApprovalResponse.Reason = "Game has already started";

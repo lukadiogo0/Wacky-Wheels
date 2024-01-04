@@ -199,7 +199,7 @@ public class WackyGameLobby : MonoBehaviour
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(new RelayServerData(allocation, "dtls"));
 
             WackyGameMultiplayer.Instance.StartHost();
-            Loader.LoadNetwork(Loader.Scene.CharacterSelectScene);
+            Loader.LoadNetwork(Loader.Scene.CarSelectScene);
         }
         catch (LobbyServiceException e)
         {

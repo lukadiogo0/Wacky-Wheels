@@ -15,7 +15,7 @@ public class Loader : MonoBehaviour
         Level4,
         LoadingScene,
         LobbyScene,
-        CharacterSelectScene,
+        CarSelectScene,
     }
 
 
