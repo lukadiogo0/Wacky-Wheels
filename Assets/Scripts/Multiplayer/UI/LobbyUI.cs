@@ -23,7 +23,7 @@ public class LobbyUI : MonoBehaviour {
     private void Awake() {
         mainMenuButton.onClick.AddListener(() => {
             WackyGameLobby.Instance.LeaveLobby();
-            //Loader.Load(Loader.Scene.MainMenuScene);
+            Loader.Load(Loader.Scene.MainMenuScene);
         });
         createLobbyButton.onClick.AddListener(() => {
             lobbyCreateUI.Show();

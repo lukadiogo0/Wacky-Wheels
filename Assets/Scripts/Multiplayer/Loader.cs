@@ -8,7 +8,7 @@ public class Loader : MonoBehaviour
 {
     public enum Scene
     {
-        MainMenu,
+        MainMenuScene,
         Level1,
         Level2,
         Level3,
