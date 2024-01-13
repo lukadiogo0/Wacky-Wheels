@@ -458,6 +458,7 @@ PrefabInstance:
     - {fileID: 1231229547006488210, guid: c2b10fa9d87d023429e72d148a23cf03, type: 3}
     - {fileID: 2955724964800323605, guid: c2b10fa9d87d023429e72d148a23cf03, type: 3}
     - {fileID: 627749045389998927, guid: c2b10fa9d87d023429e72d148a23cf03, type: 3}
+    - {fileID: 1083446026891448352, guid: c2b10fa9d87d023429e72d148a23cf03, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c2b10fa9d87d023429e72d148a23cf03, type: 3}
 --- !u!114 &705565046 stripped
 MonoBehaviour:
@@ -973,3 +974,32 @@ MonoBehaviour:
   createPublicButton: {fileID: 705565052}
   createPrivateButton: {fileID: 705565051}
   lobbyNameInputField: {fileID: 705565053}
+--- !u!114 &1894871455 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 585979682293357371, guid: c2b10fa9d87d023429e72d148a23cf03, type: 3}
+  m_PrefabInstance: {fileID: 705565045}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1894871456 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7334899421471831133, guid: c2b10fa9d87d023429e72d148a23cf03, type: 3}
+  m_PrefabInstance: {fileID: 705565045}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1894871457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1894871456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5b0421a2524fb74fb60716ff022440f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lobbyNameText: {fileID: 1894871455}
