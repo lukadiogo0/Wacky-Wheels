@@ -7,6 +7,7 @@ public class UtilityFunctions_Multiplayer : NetworkBehaviour
 {
     public void SetDrifting()
     {
+        if (!IsOwner) return;
         transform.parent.GetComponent<KartController_Multiplayer>().isSliding = true;
     }
 }
