@@ -343,7 +343,7 @@ PrefabInstance:
     - target: {fileID: 756011345613983787, guid: c2b10fa9d87d023429e72d148a23cf03, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 7560b939327fc8a4faa01eeb4251518c, type: 3}
+      objectReference: {fileID: 21300000, guid: 4c8eda49ec544e148bf0ce1b710ce73f, type: 3}
     - target: {fileID: 2811240910135604929, guid: c2b10fa9d87d023429e72d148a23cf03, type: 3}
       propertyPath: m_Name
       value: LobbySceneCanvas
@@ -915,7 +915,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc3e034f16fb0f743bf1f77062fb0487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerColorList: []
+  playerColorList:
+  - {r: 0.7372549, g: 0.19215688, b: 0.26666668, a: 0}
+  - {r: 0.43921572, g: 0.7607844, b: 0.38823533, a: 0}
+  - {r: 0.7372549, g: 0.2784314, b: 0.6509804, a: 0}
+  - {r: 0.27058825, g: 0.47058827, b: 0.7490196, a: 0}
+  - {r: 0.56078434, g: 0.24705884, b: 0.23529413, a: 0}
+  ColorList:
+  - {fileID: 2100000, guid: 0a5fa0e3de53444488e88fe9ce77ebee, type: 2}
+  - {fileID: 2100000, guid: 36e7c998e660c9646bec8182b09f625c, type: 2}
+  - {fileID: 2100000, guid: 8717d257f117dab42b822658c521ead1, type: 2}
+  - {fileID: 2100000, guid: ca867e7691940e545bd953dbdb41dca6, type: 2}
+  - {fileID: 2100000, guid: fe2f9f2ef464e704f9ba11acdca2882a, type: 2}
 --- !u!114 &1217241347
 MonoBehaviour:
   m_ObjectHideFlags: 0
