@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Kart_Speedometer : MonoBehaviour
 {
-    private KartController kartController;
+    private KartController_Multiplayer kartController;
     public GameObject needle;
     private float startPosition = 220f,endPosition = -46f;
     private float desiredPosition;
@@ -13,7 +13,7 @@ public class Kart_Speedometer : MonoBehaviour
 
     private void Start()
     {
-        kartController = GetComponent<KartController>();
+        kartController = GetComponent<KartController_Multiplayer>();
     }
 
     // Update is called once per frame
