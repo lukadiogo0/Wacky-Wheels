@@ -15,8 +15,8 @@ public class PlayerVisual : MonoBehaviour
         bodyMeshRenderer.material = material;
     }
 
-    public void SetPlayerColor(Color color)
+    public void SetPlayerColor(Material material)
     {
-        material.color = color;
+        bodyMeshRenderer.material = material;
     }
 }

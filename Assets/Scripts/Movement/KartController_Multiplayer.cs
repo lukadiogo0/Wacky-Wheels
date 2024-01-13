@@ -94,7 +94,7 @@ public class KartController_Multiplayer : NetworkBehaviour
     private void Start()
     {
         PlayerData playerData = WackyGameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
-        playerVisual.SetPlayerColor(WackyGameMultiplayer.Instance.GetPlayerColor(playerData.colorId));
+        playerVisual.SetPlayerColor(WackyGameMultiplayer.Instance.GetPlayerMaterial(playerData.colorId));
     }
 
     public override void OnNetworkSpawn()

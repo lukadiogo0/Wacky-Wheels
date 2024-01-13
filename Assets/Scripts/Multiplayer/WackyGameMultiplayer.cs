@@ -21,7 +21,7 @@ public class WackyGameMultiplayer : NetworkBehaviour
     public event EventHandler OnFailedToJoinGame;
     public event EventHandler OnPlayerDataNetworkListChanged;
 
-    [SerializeField] private List<Color> playerColorList;
+    [SerializeField] private List<Material> playerMaterialList;
 
 
     private NetworkList<PlayerData> playerDataNetworkList;
@@ -200,9 +200,9 @@ public class WackyGameMultiplayer : NetworkBehaviour
         return playerDataNetworkList[playerIndex];
     }
 
-    public Color GetPlayerColor(int colorId)
+    public Material GetPlayerMaterial(int colorId)
     {
-        return playerColorList[colorId];
+        return playerMaterialList[colorId];
     }
 
     public void ChangePlayerColor(int colorId)
@@ -243,7 +243,7 @@ public class WackyGameMultiplayer : NetworkBehaviour
 
     private int GetFirstUnusedColorId()
     {
-        for (int i = 0; i < playerColorList.Count; i++)
+        for (int i = 0; i < playerMaterialList.Count; i++)
         {
             if (IsColorAvailable(i))
             {

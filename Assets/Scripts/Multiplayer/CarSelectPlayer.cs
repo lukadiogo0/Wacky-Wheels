@@ -54,7 +54,7 @@ public class CarSelectPlayer : MonoBehaviour
 
             playerNameText.text = playerData.playerName.ToString();
 
-            playerVisual.SetPlayerColor(WackyGameMultiplayer.Instance.GetPlayerColor(playerData.colorId));
+            playerVisual.SetPlayerColor(WackyGameMultiplayer.Instance.GetPlayerMaterial(playerData.colorId));
         }
         else
         {
