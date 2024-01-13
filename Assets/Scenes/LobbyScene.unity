@@ -915,13 +915,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc3e034f16fb0f743bf1f77062fb0487, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerColorList:
-  - {r: 0.7372549, g: 0.19215688, b: 0.26666668, a: 0}
-  - {r: 0.43921572, g: 0.7607844, b: 0.38823533, a: 0}
-  - {r: 0.7372549, g: 0.2784314, b: 0.6509804, a: 0}
-  - {r: 0.27058825, g: 0.47058827, b: 0.7490196, a: 0}
-  - {r: 0.56078434, g: 0.24705884, b: 0.23529413, a: 0}
-  ColorList:
+  playerMaterialList:
   - {fileID: 2100000, guid: 0a5fa0e3de53444488e88fe9ce77ebee, type: 2}
   - {fileID: 2100000, guid: 36e7c998e660c9646bec8182b09f625c, type: 2}
   - {fileID: 2100000, guid: 8717d257f117dab42b822658c521ead1, type: 2}
