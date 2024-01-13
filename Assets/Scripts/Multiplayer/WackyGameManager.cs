@@ -155,6 +155,9 @@ public class WackyGameManager : NetworkBehaviour
                 break;
             case State.CountdownToStart:
                 countdownToStartTimer.Value -= Time.deltaTime;
+
+                // FAZER COUNTDOWN AQUI
+
                 if (countdownToStartTimer.Value < 0f)
                 {
                     state.Value = State.GamePlaying;
