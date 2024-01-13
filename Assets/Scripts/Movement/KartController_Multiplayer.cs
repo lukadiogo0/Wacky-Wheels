@@ -107,20 +107,16 @@ public class KartController_Multiplayer : NetworkBehaviour
         switch (SceneManager.GetActiveScene().name)
         {
             case "Level1":
-                transform.position = spawnPositionListLevel1[WackyGameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)];
-                transform.Rotate(0f, -90f, 0f, Space.Self);
+                SpawnKartServerRpc(spawnPositionListLevel1[WackyGameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)], -90f);
                 break;
             case "Level2":
-                transform.position = spawnPositionListLevel2[WackyGameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)];
-                transform.Rotate(0f, -90f, 0f, Space.Self);
+                SpawnKartServerRpc(spawnPositionListLevel2[WackyGameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)], -90f);
                 break;
             case "Level3":
-                transform.position = spawnPositionListLevel3[WackyGameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)];
-                transform.Rotate(0f, -90f, 0f, Space.Self);
+                SpawnKartServerRpc(spawnPositionListLevel3[WackyGameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)], -90f);
                 break;
             case "Level4":
-                transform.position = spawnPositionListLevel4[WackyGameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)];
-                transform.Rotate(0f, 90f, 0f, Space.Self);
+                SpawnKartServerRpc(spawnPositionListLevel4[WackyGameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)], 90f);
                 break;
             default: break;
 
@@ -128,7 +124,18 @@ public class KartController_Multiplayer : NetworkBehaviour
         OnAnyPlayerSpawned?.Invoke(this, EventArgs.Empty);
     }
 
+    [ServerRpc]
+    private void SpawnKartServerRpc(Vector3 position, float yRotation)
+    {
+        SpawnKartClientRpc(OwnerClientId, position, yRotation);
+    }
 
+    [ClientRpc]
+    private void SpawnKartClientRpc(ulong clientId, Vector3 position, float yRotation)
+    {
+        transform.position = position;
+        transform.Rotate(0f, yRotation, 0f, Space.Self);
+    }
 
     void Awake()
     {

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class Kart_Speedometer : MonoBehaviour
+public class Kart_Speedometer : NetworkBehaviour
 {
     private KartController_Multiplayer kartController;
     public GameObject needle;
@@ -19,7 +20,9 @@ public class Kart_Speedometer : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-       vehicleSpeed = kartController.CurrentSpeed;
+       if (!IsOwner) return;
+       needle.SetActive(true);
+        vehicleSpeed = kartController.CurrentSpeed;
        if(vehicleSpeed < 0)
         {
             vehicleSpeed = 0;
