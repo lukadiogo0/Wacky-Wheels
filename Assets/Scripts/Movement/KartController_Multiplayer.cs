@@ -1,14 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 using Unity.Netcode;
 using Unity.Multiplayer.Samples.Utilities.ClientAuthority;
+using System;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class KartController_Multiplayer : NetworkBehaviour
 {
-    public Rigidbody rb;
+
+    public static event EventHandler OnAnyPlayerSpawned;
+
+    public static void ResetStaticData()
+    {
+        OnAnyPlayerSpawned = null;
+    }
+
+    public static KartController_Multiplayer LocalInstance { get; private set; }
+
+    [SerializeField] private List<Vector3> spawnPositionListLevel1;
+    [SerializeField] private List<Vector3> spawnPositionListLevel2;
+    [SerializeField] private List<Vector3> spawnPositionListLevel3;
+    [SerializeField] private List<Vector3> spawnPositionListLevel4;
+    [SerializeField] private PlayerVisual playerVisual;
+
+    private Rigidbody rb;
     public float offsety;
 
     public float CurrentSpeed = 0;
@@ -76,28 +91,44 @@ public class KartController_Multiplayer : NetworkBehaviour
         RIGHT,
     }
 
+    private void Start()
+    {
+        PlayerData playerData = WackyGameMultiplayer.Instance.GetPlayerDataFromClientId(OwnerClientId);
+        playerVisual.SetPlayerColor(WackyGameMultiplayer.Instance.GetPlayerColor(playerData.colorId));
+    }
+
     public override void OnNetworkSpawn()
     {
         if (IsOwner)
         {
-            SpawnServerRpc(new Vector3(597.64f, 61.3f, 446.8f));
+            LocalInstance = this;
         }
-        base.OnNetworkSpawn();
+
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Level1":
+                transform.position = spawnPositionListLevel1[WackyGameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)];
+                transform.Rotate(0f, -90f, 0f, Space.Self);
+                break;
+            case "Level2":
+                transform.position = spawnPositionListLevel2[WackyGameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)];
+                transform.Rotate(0f, -90f, 0f, Space.Self);
+                break;
+            case "Level3":
+                transform.position = spawnPositionListLevel3[WackyGameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)];
+                transform.Rotate(0f, -90f, 0f, Space.Self);
+                break;
+            case "Level4":
+                transform.position = spawnPositionListLevel4[WackyGameMultiplayer.Instance.GetPlayerDataIndexFromClientId(OwnerClientId)];
+                transform.Rotate(0f, 90f, 0f, Space.Self);
+                break;
+            default: break;
+
+        }
+        OnAnyPlayerSpawned?.Invoke(this, EventArgs.Empty);
     }
 
-    [ServerRpc]
-    private void SpawnServerRpc(Vector3 pos)
-    {
-        SpawnClientRpc(OwnerClientId, pos);
-    }
 
-    [ClientRpc]
-    private void SpawnClientRpc(ulong clientId, Vector3 pos)
-    {
-        var nt = GetComponent<ClientNetworkTransform>();
-        nt.transform.position = pos;
-        nt.transform.rotation = Quaternion.Euler(0f, -90f, 0f);
-    }
 
     void Awake()
     {
@@ -170,6 +201,7 @@ public class KartController_Multiplayer : NetworkBehaviour
         
 
     }
+   
     private void move()
     {
         RealSpeed = transform.InverseTransformDirection(rb.velocity).z; //real velocity before setting the value. This can be useful if say you want to have hair moving on the player, but don't want it to move if you are accelerating into a wall, since checking velocity after it has been applied will always be the applied value, and not real
@@ -490,8 +522,14 @@ public class KartController_Multiplayer : NetworkBehaviour
     {
         position -= 1;
     }
+    
     public void IncreaseLap()
     {
         LapsDone += 1;
+    }
+
+    public NetworkObject GetNetworkObject()
+    {
+        return NetworkObject;
     }
 }

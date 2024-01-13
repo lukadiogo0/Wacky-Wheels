@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class Kart_Speedometer : MonoBehaviour
 {
-    public KartController kartController;
+    private KartController kartController;
     public GameObject needle;
     private float startPosition = 220f,endPosition = -46f;
     private float desiredPosition;
 
-    public float vehicleSpeed;
+    private float vehicleSpeed;
 
-    void Start()
+    private void Start()
     {
-
+        kartController = GetComponent<KartController>();
     }
 
     // Update is called once per frame
@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
         }
        updateNeedle();
     }
+
     public void updateNeedle(){
         desiredPosition = startPosition - endPosition;
         float temp = vehicleSpeed / 180;
