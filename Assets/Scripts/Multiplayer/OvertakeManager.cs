@@ -14,7 +14,7 @@ public class OvertakeManager : MonoBehaviour
 
         if (overtakerPos < overtakenPos && overtakenLap == overtakerLap)
         {
-
+            WackyGameManager.Instance.UpdateKartListPos(other.gameObject, gameObject.transform.parent.gameObject);
         }
     }
 }
