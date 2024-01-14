@@ -12,6 +12,7 @@ TagManager:
   - Ground
   - Checkpoint
   - Game Music
+  - PosTrigger
   layers:
   - Default
   - TransparentFX

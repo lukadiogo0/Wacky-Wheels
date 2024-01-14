@@ -44,7 +44,9 @@ public class WackyGameManager : NetworkBehaviour
     private bool autoTestGamePausedState;
     public List<GameObject> kartsList = new List<GameObject>();
     private int lapCounter;
+    public int totalPlayers;
     private int maxLaps;
+    public int currentLevel = 1;
 
     private void Awake()
     {
@@ -62,13 +64,13 @@ public class WackyGameManager : NetworkBehaviour
         switch (SceneManager.GetActiveScene().name)
         {
             case "Level1":
-                maxLaps = 6;
+                maxLaps = 1;
                 break;
             case "Level2":
-                maxLaps = 6;
+                maxLaps = 1;
                 break;
             case "Level3":
-                maxLaps = 5;
+                maxLaps = 1;
                 break;
             case "Level4":
                 maxLaps = 4;
@@ -201,8 +203,25 @@ public class WackyGameManager : NetworkBehaviour
                 }
                 break;
             case State.RaceEnd:
-                //MUDAR SCENE
-                break;
+                if (currentLevel == 1)
+                {
+                    currentLevel = 2;
+                    Loader.Load(Loader.Scene.Level2);
+                    break;
+                }
+                else if(currentLevel == 2)
+                {
+                    currentLevel = 3;
+                    Loader.Load(Loader.Scene.Level3);
+                    break;
+                }
+                else if(currentLevel == 3)
+                {
+                    currentLevel = 4;
+                    Loader.Load(Loader.Scene.Level4);
+                    break;
+                }
+             break;
         }
     }
 
@@ -271,6 +290,7 @@ public class WackyGameManager : NetworkBehaviour
     {
         if (kartGameObject != null && !kartsList.Contains(kartGameObject)) {
             kartsList.Add(kartGameObject);
+            totalPlayers++;
         }
     }
 
