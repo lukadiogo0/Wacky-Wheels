@@ -6,18 +6,10 @@ public class CheckpointHalfLap : MonoBehaviour
 {
     void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<KartController>(out KartController kart)){
+        if (other.TryGetComponent<KartController_Multiplayer>(out KartController_Multiplayer kart)){
             if (kart.hasPassStart) {
                 kart.hasPassStart = false;
                 kart.hasPassHalf = true;
-            }
-        }
-        if (other.TryGetComponent<NavMesh>(out NavMesh bot))
-        {
-            if (bot.hasPassStart)
-            {
-                bot.hasPassStart = false;
-                bot.hasPassHalf = true;
             }
         }
     }

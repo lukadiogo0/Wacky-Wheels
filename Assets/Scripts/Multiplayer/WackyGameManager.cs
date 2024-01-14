@@ -42,7 +42,7 @@ public class WackyGameManager : NetworkBehaviour
     private Dictionary<ulong, bool> playerReadyDictionary;
     private Dictionary<ulong, bool> playerPausedDictionary;
     private bool autoTestGamePausedState;
-    private List<GameObject> kartsList = new List<GameObject>();
+    public List<GameObject> kartsList = new List<GameObject>();
     private int lapCounter;
     private int maxLaps;
 
@@ -189,7 +189,7 @@ public class WackyGameManager : NetworkBehaviour
                     state.Value = State.GamePlaying;
                     foreach(GameObject kart in kartsList)
                     {
-                        kart.GetComponent<KartController_Multiplayer>().SetCanMove(true);
+                        kart.GetComponent<KartController_Multiplayer>().SetCanMoveServerRpc(true);
                     }
                 }
 

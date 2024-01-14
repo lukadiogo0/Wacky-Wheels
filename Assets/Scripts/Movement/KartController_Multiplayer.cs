@@ -513,7 +513,14 @@ public class KartController_Multiplayer : NetworkBehaviour
         this.isSpaceStillPressed = isSpaceStillPressed;
     }
 
-    public void SetCanMove(bool canMove)
+    [ServerRpc]
+    public void SetCanMoveServerRpc(bool canMove)
+    {
+        SetCanMoveClientRpc(OwnerClientId, canMove);
+    }
+
+    [ClientRpc]
+    public void SetCanMoveClientRpc(ulong clientId, bool canMove)
     {
         this.canMove = canMove;
     }
@@ -545,6 +552,8 @@ public class KartController_Multiplayer : NetworkBehaviour
 
     public void KartPassFinishLine()
     {
+        hasPassStart = true;
+        hasPassHalf = false;
         lapTimeManager.ResetTime();
         IncreaseLap();
     }

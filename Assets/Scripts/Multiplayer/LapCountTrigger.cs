@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class LapCountTrigger : MonoBehaviour
+public class LapCountTrigger : NetworkBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if(other != null && other.gameObject.GetComponent<KartController_Multiplayer>() != null)
+        if (other.TryGetComponent<KartController_Multiplayer>(out KartController_Multiplayer kart))
         {
-            WackyGameManager.Instance.KartPassFinishLine(other.gameObject);
-            other.gameObject.GetComponent<KartController_Multiplayer>().KartPassFinishLine();
+            if (kart.hasPassHalf) { 
+                WackyGameManager.Instance.KartPassFinishLine(other.gameObject);
+                kart.KartPassFinishLine();
+            }
         }
     }
 }
