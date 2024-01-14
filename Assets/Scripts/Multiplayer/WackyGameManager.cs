@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Netcode;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class WackyGameManager : NetworkBehaviour
 {
@@ -40,7 +42,9 @@ public class WackyGameManager : NetworkBehaviour
     private Dictionary<ulong, bool> playerReadyDictionary;
     private Dictionary<ulong, bool> playerPausedDictionary;
     private bool autoTestGamePausedState;
-
+    private List<GameObject> kartsList = new List<GameObject>();
+    private int lapCounter;
+    private int maxLaps;
 
     private void Awake()
     {
@@ -54,6 +58,26 @@ public class WackyGameManager : NetworkBehaviour
     {
         GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
         GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
+        lapCounter = -1;
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Level1":
+                maxLaps = 6;
+                break;
+            case "Level2":
+                maxLaps = 6;
+                break;
+            case "Level3":
+                maxLaps = 5;
+                break;
+            case "Level4":
+                maxLaps = 4;
+                break;
+            default:
+                maxLaps = 10;
+                break;
+
+        }
     }
 
     public override void OnNetworkSpawn()
@@ -163,7 +187,10 @@ public class WackyGameManager : NetworkBehaviour
                 if (countdownToStartTimer.Value < 0f)
                 {
                     state.Value = State.GamePlaying;
-                    //gamePlayingTimer.Value = gamePlayingTimerMax;
+                    foreach(GameObject kart in kartsList)
+                    {
+                        kart.GetComponent<KartController_Multiplayer>().SetCanMove(true);
+                    }
                 }
 
                 break;
@@ -173,6 +200,10 @@ public class WackyGameManager : NetworkBehaviour
                 {
                     state.Value = State.RaceEnd;
                 }*/
+                if(lapCounter == maxLaps)
+                {
+                    state.Value = State.RaceEnd;
+                }
                 break;
             case State.RaceEnd:
                 break;
@@ -238,6 +269,26 @@ public class WackyGameManager : NetworkBehaviour
 
             OnLocalGameUnpaused?.Invoke(this, EventArgs.Empty);
         }
+    }
+
+    public void AddKartToList(GameObject kartGameObject)
+    {
+        if (kartGameObject != null && !kartsList.Contains(kartGameObject)) {
+            kartsList.Add(kartGameObject);
+        }
+    }
+
+    public void KartPassFinishLine(GameObject kartGameObject)
+    {
+        if (kartsList.Contains(kartGameObject) && kartsList[0] == kartGameObject)
+        {
+            lapCounter++;
+        }
+    }
+
+    public int GetMaxLaps()
+    {
+        return maxLaps;
     }
 
     [ServerRpc(RequireOwnership = false)]

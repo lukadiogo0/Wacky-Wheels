@@ -33,9 +33,9 @@ public class CheckpointStart : MonoBehaviour
             if (kart.hasPassHalf)
             {
                 kart.IncreaseLap();
-                LapTimeManager.MinuteCount = 0;
-                LapTimeManager.SecondCount = 0;
-                LapTimeManager.MiliSecondCount = 0;
+                //LapTimeManager.MinuteCount = 0;
+                //LapTimeManager.SecondCount = 0;
+                //LapTimeManager.MiliSecondCount = 0;
 
                 kart.hasPassStart = true;
                 kart.hasPassHalf = false;

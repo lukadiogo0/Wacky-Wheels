@@ -78,10 +78,11 @@ public class KartController_Multiplayer : NetworkBehaviour
     public GameObject positionDisplay;
     public int InicialPosition;
     public int position;
-    public int LapsDone;
-    private bool canMove = true;
+    public int LapsDone = -1;
+    private bool canMove = false;
     public bool hasPassHalf;
     public bool hasPassStart;
+    [SerializeField] private LapTimeManager lapTimeManager;
 
     private enum Direction
     {
@@ -144,12 +145,14 @@ public class KartController_Multiplayer : NetworkBehaviour
         position = InicialPosition;
         //positionDisplay.GetComponent<TextMeshProUGUI>().text = "" + position +"/"+InicialPosition;
         hasPassStart = true;
+        WackyGameManager.Instance.AddKartToList(gameObject);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         if (!IsOwner) return;
+
         if (canMove) { 
             move();
             sound();
@@ -538,5 +541,11 @@ public class KartController_Multiplayer : NetworkBehaviour
     public NetworkObject GetNetworkObject()
     {
         return NetworkObject;
+    }
+
+    public void KartPassFinishLine()
+    {
+        lapTimeManager.ResetTime();
+        IncreaseLap();
     }
 }

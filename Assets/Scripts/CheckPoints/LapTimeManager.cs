@@ -3,24 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.Netcode;
 
-public class LapTimeManager : MonoBehaviour
+public class LapTimeManager : NetworkBehaviour
 {
 
-    public static int MinuteCount = 0;
-    public static int SecondCount = 0;
-    public static float MiliSecondCount = 0;
-    public static string MiliSecondDisplay;
+    private static int MinuteCount = 0;
+    private static int SecondCount = 0;
+    private static float MiliSecondCount = 0;
+    private static string MiliSecondDisplay;
 
-    public GameObject MinuteBox;
-    public GameObject SecondBox;
-    public GameObject MiliSecondBox;
+    [SerializeField] private GameObject MinuteBox;
+    [SerializeField] private GameObject SecondBox;
+    [SerializeField] private GameObject MiliSecondBox;
 
     void Update()
     {
+        if (!IsOwner)  return;
+
+        MinuteBox.SetActive(true);
+        SecondBox.SetActive(true);
+        MiliSecondBox.SetActive(true);
+
         MiliSecondCount += Time.deltaTime * 10;
         
-
         if (MiliSecondCount >= 10)
         {
             MiliSecondCount -= 10;
@@ -53,5 +59,12 @@ public class LapTimeManager : MonoBehaviour
         {
             MinuteBox.GetComponent<TextMeshProUGUI>().text = "" + MinuteCount + ":";
         }
+    }
+
+    public void ResetTime()
+    {
+        MinuteCount = 0;
+        SecondCount = 0;
+        MiliSecondCount = 0;
     }
 }
