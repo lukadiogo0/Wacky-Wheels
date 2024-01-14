@@ -125,7 +125,7 @@ public class KartController_Multiplayer : NetworkBehaviour
         OnAnyPlayerSpawned?.Invoke(this, EventArgs.Empty);
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void SpawnKartServerRpc(Vector3 position, float yRotation)
     {
         SpawnKartClientRpc(OwnerClientId, position, yRotation);
@@ -464,13 +464,13 @@ public class KartController_Multiplayer : NetworkBehaviour
             MoveWheelsServerRpc(Time.deltaTime * RealSpeed);
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void MoveWheelsServerRpc(float speed)
     {
         MoveWheelsClientRpc(OwnerClientId, speed);
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     private void TurnWheelsServerRpc(float newRotation)
     {
         TurnWheelsClientRpc(OwnerClientId, newRotation);
@@ -513,7 +513,7 @@ public class KartController_Multiplayer : NetworkBehaviour
         this.isSpaceStillPressed = isSpaceStillPressed;
     }
 
-    [ServerRpc]
+    [ServerRpc(RequireOwnership = false)]
     public void SetCanMoveServerRpc(bool canMove)
     {
         SetCanMoveClientRpc(OwnerClientId, canMove);
