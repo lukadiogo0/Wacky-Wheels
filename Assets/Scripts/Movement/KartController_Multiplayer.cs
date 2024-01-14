@@ -545,12 +545,17 @@ public class KartController_Multiplayer : NetworkBehaviour
         return NetworkObject;
     }
 
+    public int GetKartLap()
+    {
+        return lapCountManager.GetLap();
+    }
+
     public void KartPassFinishLine()
     {
         if (!IsOwner) return;
         hasPassStart = true;
         hasPassHalf = false;
-        /*lapTimeManager.ResetTime();
-        lapCountManager.IncreaseLap();*/
+        lapTimeManager.ResetTime();
+        lapCountManager.IncreaseLap();
     }
 }

@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 public class LapCountManager : NetworkBehaviour
 {
     [SerializeField] private GameObject LapCounter;
-    [SerializeField] private int lapsDone = 0;
+    private int lapsDone = 0;
 
 
     // Update is called once per frame
@@ -24,5 +24,10 @@ public class LapCountManager : NetworkBehaviour
     {
         if (!IsOwner) return;
         lapsDone++;
+    }
+
+    public int GetLap()
+    {
+        return lapsDone;
     }
 }

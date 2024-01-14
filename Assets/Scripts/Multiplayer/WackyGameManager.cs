@@ -44,7 +44,6 @@ public class WackyGameManager : NetworkBehaviour
     private bool autoTestGamePausedState;
     public List<GameObject> kartsList = new List<GameObject>();
     private int lapCounter;
-    public int totalPlayers;
     private int maxLaps;
     public int currentLevel = 1;
 
@@ -290,8 +289,18 @@ public class WackyGameManager : NetworkBehaviour
     {
         if (kartGameObject != null && !kartsList.Contains(kartGameObject)) {
             kartsList.Add(kartGameObject);
-            totalPlayers++;
         }
+    }
+
+    public int GetKartPosition(GameObject kartGameObject)
+    {
+        if (!kartsList.Contains(kartGameObject)) return -1;
+        return kartsList.IndexOf(kartGameObject);
+    }
+
+    public int GetTotalKarts()
+    {
+        return kartsList.Count;
     }
 
     public void KartPassFinishLine(GameObject kartGameObject)
@@ -305,6 +314,15 @@ public class WackyGameManager : NetworkBehaviour
     public int GetMaxLaps()
     {
         return maxLaps;
+    }
+
+    public void UpdateKartListPos(GameObject kartOvertaker, GameObject kartOvertaken)
+    {
+        int auxIndex = kartsList.IndexOf(kartOvertaker);
+        int auxIndex2 = kartsList.IndexOf(kartOvertaken);
+
+        kartsList[auxIndex] = kartOvertaken;
+        kartsList[auxIndex2] = kartOvertaker;
     }
 
     [ServerRpc(RequireOwnership = false)]

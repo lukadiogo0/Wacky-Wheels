@@ -9,15 +9,17 @@ using UnityEngine.UIElements;
 public class PositionManager : NetworkBehaviour
 {
     [SerializeField] private GameObject PosCounter;
+    private int position = 0;
 
-
-
-    // Update is called once per frame
     void Update()
     {
         if (!IsOwner) return;
         PosCounter.SetActive(true);
-        PosCounter.GetComponent<TextMeshProUGUI>().text = "0 / " + WackyGameManager.Instance.totalPlayers;
+        position = WackyGameManager.Instance.GetKartPosition(gameObject.transform.parent.gameObject) + 1;
+        
+        if (position > 0) { 
+            PosCounter.GetComponent<TextMeshProUGUI>().text = "" + position + "/" + WackyGameManager.Instance.GetTotalKarts();
+        }
     }
 
 

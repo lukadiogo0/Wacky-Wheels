@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 5653754656184679222}
   - component: {fileID: 2626146985111764913}
   - component: {fileID: 2331350254139134210}
-  - component: {fileID: 785859764005004800}
+  - component: {fileID: 1147152942723031340}
   m_Layer: 0
-  m_Name: PositionCollider
+  m_Name: OvertakeCollider
   m_TagString: PosTrigger
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 16148852629627278}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.2, y: 1, z: 1.11}
-  m_LocalScale: {x: 27.88236, y: 8.906196, z: 0.5}
+  m_LocalPosition: {x: -0.2, y: 4.24, z: -0.88}
+  m_LocalScale: {x: 26.146683, y: 8.122451, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 785902137588024447}
@@ -98,7 +98,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &785859764005004800
+--- !u!114 &1147152942723031340
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,7 +107,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 16148852629627278}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b2cad1f0bb5c8a46bd695b49ea292b2, type: 3}
+  m_Script: {fileID: 11500000, guid: 7bff986bd094e114c969de32dd11b0d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &325153225027022800
