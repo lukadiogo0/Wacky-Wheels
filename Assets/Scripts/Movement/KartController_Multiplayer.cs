@@ -125,7 +125,7 @@ public class KartController_Multiplayer : NetworkBehaviour
         OnAnyPlayerSpawned?.Invoke(this, EventArgs.Empty);
     }
 
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     private void SpawnKartServerRpc(Vector3 position, float yRotation)
     {
         SpawnKartClientRpc(OwnerClientId, position, yRotation);
