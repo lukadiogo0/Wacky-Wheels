@@ -67402,7 +67402,6 @@ GameObject:
   - component: {fileID: 1400036869}
   - component: {fileID: 1400036868}
   - component: {fileID: 1400036867}
-  - component: {fileID: 1400036872}
   - component: {fileID: 1400036871}
   m_Layer: 0
   m_Name: LapCounterTrigger
@@ -67501,26 +67500,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6b55d39126a7b34f94f023b62fd80e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1400036872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1400036866}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 3568796958
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!4 &1402989309 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4a8feb694ccb19a44909690a707a84d6, type: 3}

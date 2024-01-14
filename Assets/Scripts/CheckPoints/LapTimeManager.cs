@@ -63,6 +63,7 @@ public class LapTimeManager : NetworkBehaviour
 
     public void ResetTime()
     {
+        if (!IsOwner) return;
         MinuteCount = 0;
         SecondCount = 0;
         MiliSecondCount = 0;
