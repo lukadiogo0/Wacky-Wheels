@@ -58,7 +58,7 @@ public class WackyGameManager : NetworkBehaviour
     {
         GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
         GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
-        lapCounter = -1;
+        lapCounter = 0;
         switch (SceneManager.GetActiveScene().name)
         {
             case "Level1":
@@ -195,17 +195,13 @@ public class WackyGameManager : NetworkBehaviour
 
                 break;
             case State.GamePlaying:
-                /*gamePlayingTimer.Value -= Time.deltaTime;
-                if (gamePlayingTimer.Value < 0f)
-                {
-                    state.Value = State.RaceEnd;
-                }*/
                 if(lapCounter == maxLaps)
                 {
                     state.Value = State.RaceEnd;
                 }
                 break;
             case State.RaceEnd:
+                //MUDAR SCENE
                 break;
         }
     }

@@ -78,11 +78,11 @@ public class KartController_Multiplayer : NetworkBehaviour
     public GameObject positionDisplay;
     public int InicialPosition;
     public int position;
-    public int LapsDone = -1;
     private bool canMove = false;
     public bool hasPassHalf;
     public bool hasPassStart;
     [SerializeField] private LapTimeManager lapTimeManager;
+    [SerializeField] private LapCountManager lapCountManager;
 
     private enum Direction
     {
@@ -539,11 +539,6 @@ public class KartController_Multiplayer : NetworkBehaviour
     {
         position -= 1;
     }
-    
-    public void IncreaseLap()
-    {
-        LapsDone += 1;
-    }
 
     public NetworkObject GetNetworkObject()
     {
@@ -556,6 +551,6 @@ public class KartController_Multiplayer : NetworkBehaviour
         hasPassStart = true;
         hasPassHalf = false;
         lapTimeManager.ResetTime();
-        IncreaseLap();
+        lapCountManager.IncreaseLap();
     }
 }
