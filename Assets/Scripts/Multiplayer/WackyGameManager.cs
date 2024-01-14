@@ -128,6 +128,7 @@ public class WackyGameManager : NetworkBehaviour
                 // This player is NOT ready
                 allClientsReady = false;
                 break;
+
             }
         }
 
@@ -152,6 +153,7 @@ public class WackyGameManager : NetworkBehaviour
         switch (state.Value)
         {
             case State.WaitingToStart:
+                state.Value = State.CountdownToStart;
                 break;
             case State.CountdownToStart:
                 countdownToStartTimer.Value -= Time.deltaTime;
@@ -163,6 +165,7 @@ public class WackyGameManager : NetworkBehaviour
                     state.Value = State.GamePlaying;
                     //gamePlayingTimer.Value = gamePlayingTimerMax;
                 }
+
                 break;
             case State.GamePlaying:
                 /*gamePlayingTimer.Value -= Time.deltaTime;
