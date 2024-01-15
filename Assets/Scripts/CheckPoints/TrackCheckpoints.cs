@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using Unity.Netcode;
 using UnityEngine;
 
@@ -55,13 +56,13 @@ public class TrackCheckpoints : NetworkBehaviour
     }
 
     [ServerRpc]
-    public void StartCheckPointManagerServerRpc()
+    public void StartCheckPointManagerServerRpc(NetworkObjectReference[] karts)
     {
-        //StartCheckPointManagerClientRpc(OwnerClientId,);
+        StartCheckPointManagerClientRpc(OwnerClientId, karts);
     }
 
-    //[ClientRpc]
-    /*public void StartCheckPointManagerClientRpc(ulong clientId, List<GameObject> karts)
+    [ClientRpc]
+    public void StartCheckPointManagerClientRpc(ulong clientId, NetworkObjectReference[] karts)
     {
         nextCheckpointSingleIndexList = new List<int>();
         carTransformList = new List<Transform>();
@@ -74,7 +75,7 @@ public class TrackCheckpoints : NetworkBehaviour
         {
             nextCheckpointSingleIndexList.Add(0);
         }
-    }*/
+    }
 
     /*private void Update()
     {
