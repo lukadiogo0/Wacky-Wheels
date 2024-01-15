@@ -10,7 +10,7 @@ public class LapCountTrigger : MonoBehaviour
         if (other.TryGetComponent<KartController_Multiplayer>(out KartController_Multiplayer kart))
         {
             if (kart.hasPassHalf.Value == true) { 
-                WackyGameManager.Instance.KartPassFinishLine(other.gameObject);
+                WackyGameManager.Instance.KartPassFinishLine(kart.gameObject);
                 kart.KartPassFinishLine();
             }
         }

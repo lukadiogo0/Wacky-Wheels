@@ -593,7 +593,6 @@ public class KartController_Multiplayer : NetworkBehaviour
 
     public void KartPassFinishLine()
     {
-        if (!IsOwner) return;
         hasPassStart.Value = true;
         hasPassHalf.Value = false;
         lapTimeManager.ResetTime();
