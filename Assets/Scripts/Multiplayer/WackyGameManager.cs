@@ -60,7 +60,7 @@ public class WackyGameManager : NetworkBehaviour
     {
         GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
         GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
-        lapCounter = 0;
+        //lapCounter = 0;
         switch (SceneManager.GetActiveScene().name)
         {
             case "Level1":
@@ -201,7 +201,7 @@ public class WackyGameManager : NetworkBehaviour
 
                 break;
             case State.GamePlaying:
-                if(lapCounter == maxLaps)
+                if(lapCounter.Value == maxLaps)
                 {
                     state.Value = State.RaceEnd;
                 }
@@ -305,7 +305,7 @@ public class WackyGameManager : NetworkBehaviour
     {
         if (GetKartPosition(kartGameObject) + 1 == 1)
         {
-            lapCounter++;
+            lapCounter.Value++;
         }
     }
 

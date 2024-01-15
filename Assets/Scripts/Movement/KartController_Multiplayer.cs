@@ -144,7 +144,7 @@ public class KartController_Multiplayer : NetworkBehaviour
         audioSource = GetComponent<AudioSource>();
         position = InicialPosition;
         //positionDisplay.GetComponent<TextMeshProUGUI>().text = "" + position +"/"+InicialPosition;
-        hasPassStart = true;
+        //hasPassStart = true;
         WackyGameManager.Instance.AddKartToList(gameObject);
     }
 
@@ -594,8 +594,8 @@ public class KartController_Multiplayer : NetworkBehaviour
     public void KartPassFinishLine()
     {
         if (!IsOwner) return;
-        hasPassStart = true;
-        hasPassHalf = false;
+        hasPassStart.Value = true;
+        hasPassHalf.Value = false;
         lapTimeManager.ResetTime();
         lapCountManager.IncreaseLap();
     }
