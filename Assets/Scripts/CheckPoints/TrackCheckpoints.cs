@@ -159,10 +159,11 @@ public class TrackCheckpoints : NetworkBehaviour
                 }
             }
             Debug.Log("carInFront "+carInFront);
-            Debug.Log("checkpointSingleList.IndexOf(checkpointSingle) " + checkpointSingleList.IndexOf(checkpointSingle));
             Debug.Log("carInFrontCheckpoint " + carInFrontCheckpoint);
-            
-            if(checkpointSingleList.IndexOf(checkpointSingle) > carInFrontCheckpoint)
+            int nextCheckpointSingleIndex = nextCheckpointSingleIndexList[carTransformList.IndexOf(carTransform)];
+            Debug.Log("nextCheckpointSingleIndex " + nextCheckpointSingleIndex);
+
+            if (nextCheckpointSingleIndex > carInFrontCheckpoint)
             {
                 WackyGameManager.Instance.UpdateKartListPos(carTransform.gameObject, carInFront);
             }
