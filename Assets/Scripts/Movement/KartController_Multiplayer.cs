@@ -329,8 +329,10 @@ public class KartController_Multiplayer : NetworkBehaviour
 
                     if (!DriftPS.isPlaying && !DriftPS2.isPlaying)
                     {
-                        DriftPS.Play();
-                        DriftPS2.Play();
+                        //DriftPS.Play();
+                        PlayPSServerRpc(DriftPS);
+                        //DriftPS2.Play();
+                        PlayPSServerRpc(DriftPS2);
                     }
 
                 }
@@ -401,6 +403,18 @@ public class KartController_Multiplayer : NetworkBehaviour
 
             }
         }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void PlayPSServerRpc(ParticleSystem ps)
+    {
+        PlayPSClientRpc(OwnerClientId, ps);
+    }
+
+    [ClientRpc]
+    private void PlayPSClientRpc(ulong clientid, ParticleSystem ps)
+    {
+        ps.Play();
     }
 
     private void boosts()
