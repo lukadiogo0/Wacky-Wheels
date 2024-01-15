@@ -41,6 +41,7 @@ public class TrackCheckpoints : MonoBehaviour
     public void StartCheckPointManager(List<GameObject> karts)
     {
         nextCheckpointSingleIndexList = new List<int>();
+        carTransformList = new List<Transform>();
         foreach(GameObject gameObject in karts)
         {
             carTransformList.Add(gameObject.transform);
@@ -86,6 +87,7 @@ public class TrackCheckpoints : MonoBehaviour
 
     public void CarThroughCheckpoint(CheckpointSingle checkpointSingle, Transform carTransform)
     {
+        Debug.Log(carTransform);
         int nextCheckpointSingleIndex = nextCheckpointSingleIndexList[carTransformList.IndexOf(carTransform)];
         if (checkpointSingleList.IndexOf(checkpointSingle) == nextCheckpointSingleIndex)
         {

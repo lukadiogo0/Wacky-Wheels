@@ -8,7 +8,7 @@ public class CheckpointSingle : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (other.TryGetComponent<KartController_Multiplayer>(out KartController_Multiplayer kart)) {
-            trackCheckpoints.CarThroughCheckpoint(this, other.transform);
+            trackCheckpoints.CarThroughCheckpoint(this, kart.gameObject.transform);
         }
     }
 
