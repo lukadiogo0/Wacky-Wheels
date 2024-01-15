@@ -22,7 +22,6 @@ public class LapCountManager : NetworkBehaviour
 
     public void IncreaseLap()
     {
-        if (!IsOwner) return;
         lapsDone++;
     }
 
