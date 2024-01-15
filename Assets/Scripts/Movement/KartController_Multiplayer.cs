@@ -325,14 +325,7 @@ public class KartController_Multiplayer : NetworkBehaviour
                 //drift color particles
                 for (int i = 0; i < leftDrift.childCount; i++)
                 {
-                    ParticleSystem DriftPS = rightDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>();
-                    ParticleSystem.MainModule PSMAIN = DriftPS.main;
-                    ParticleSystem DriftPS2 = leftDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>();
-                    ParticleSystem.MainModule PSMAIN2 = DriftPS2.main;
-                    PSMAIN.startColor = drift2;
-                    PSMAIN2.startColor = drift2;
-
-
+                    ChangeColor1PSServerRpc(i);
                 }
 
             }
@@ -340,14 +333,7 @@ public class KartController_Multiplayer : NetworkBehaviour
             {
                 for (int i = 0; i < leftDrift.childCount; i++)
                 {
-
-                    ParticleSystem DriftPS = rightDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>();
-                    ParticleSystem.MainModule PSMAIN = DriftPS.main;
-                    ParticleSystem DriftPS2 = leftDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>();
-                    ParticleSystem.MainModule PSMAIN2 = DriftPS2.main;
-                    PSMAIN.startColor = drift3;
-                    PSMAIN2.startColor = drift3;
-
+                    ChangeColor2PSServerRpc(i);
                 }
             }
         }
@@ -379,11 +365,7 @@ public class KartController_Multiplayer : NetworkBehaviour
             //stop particles
             for (int i = 0; i < 5; i++)
             {
-                ParticleSystem DriftPS = rightDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>(); //right wheel particles
-                ParticleSystem DriftPS2 = leftDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>(); //left wheel particles
-                DriftPS.Stop();
-                DriftPS2.Stop();
-
+                StopPSServerRpc(i);
             }
         }
     }
@@ -411,6 +393,55 @@ public class KartController_Multiplayer : NetworkBehaviour
             DriftPS.Play();
             DriftPS2.Play();
         }
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void ChangeColor1PSServerRpc(int i)
+    {
+        ChangeColor1PSClientRpc(OwnerClientId, i);
+    }
+
+    [ClientRpc]
+    private void ChangeColor1PSClientRpc(ulong cliendid, int i)
+    {
+        ParticleSystem DriftPS = rightDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>();
+        ParticleSystem.MainModule PSMAIN = DriftPS.main;
+        ParticleSystem DriftPS2 = leftDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>();
+        ParticleSystem.MainModule PSMAIN2 = DriftPS2.main;
+        PSMAIN.startColor = drift2;
+        PSMAIN2.startColor = drift2;
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void ChangeColor2PSServerRpc(int i)
+    {
+        ChangeColor2PSClientRpc(OwnerClientId, i);
+    }
+
+    [ClientRpc]
+    private void ChangeColor2PSClientRpc(ulong cliendid, int i)
+    {
+        ParticleSystem DriftPS = rightDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>();
+        ParticleSystem.MainModule PSMAIN = DriftPS.main;
+        ParticleSystem DriftPS2 = leftDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>();
+        ParticleSystem.MainModule PSMAIN2 = DriftPS2.main;
+        PSMAIN.startColor = drift3;
+        PSMAIN2.startColor = drift3;
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    private void StopPSServerRpc(int i)
+    {
+        StopPSClientRpc(OwnerClientId, i);
+    }
+
+    [ClientRpc]
+    private void StopPSClientRpc(ulong cliendid, int i)
+    {
+        ParticleSystem DriftPS = rightDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>(); //right wheel particles
+        ParticleSystem DriftPS2 = leftDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>(); //left wheel particles
+        DriftPS.Stop();
+        DriftPS2.Stop();
     }
 
     private void boosts()
