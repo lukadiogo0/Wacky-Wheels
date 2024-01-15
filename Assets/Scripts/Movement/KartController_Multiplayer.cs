@@ -317,24 +317,7 @@ public class KartController_Multiplayer : NetworkBehaviour
             {
                 for (int i = 0; i < leftDrift.childCount; i++)
                 {
-                    
-                    ParticleSystem DriftPS = rightDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>(); //right wheel particles
-                    ParticleSystem.MainModule PSMAIN = DriftPS.main;
-
-                    ParticleSystem DriftPS2 = leftDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>(); //left wheel particles
-                    ParticleSystem.MainModule PSMAIN2 = DriftPS2.main;
-
-                    PSMAIN.startColor = drift1;
-                    PSMAIN2.startColor = drift1;
-
-                    if (!DriftPS.isPlaying && !DriftPS2.isPlaying)
-                    {
-                        //DriftPS.Play();
-                        PlayPSServerRpc(DriftPS);
-                        //DriftPS2.Play();
-                        PlayPSServerRpc(DriftPS2);
-                    }
-
+                    PlayPSServerRpc(i);
                 }
             }
             if (driftTime >= 2 && driftTime < 4)
@@ -406,15 +389,28 @@ public class KartController_Multiplayer : NetworkBehaviour
     }
 
     [ServerRpc(RequireOwnership = false)]
-    private void PlayPSServerRpc(ParticleSystem ps)
+    private void PlayPSServerRpc(int i)
     {
-        PlayPSClientRpc(OwnerClientId, ps);
+        PlayPSClientRpc(OwnerClientId, i);
     }
 
     [ClientRpc]
-    private void PlayPSClientRpc(ulong clientid, ParticleSystem ps)
+    private void PlayPSClientRpc(ulong clientid, int i)
     {
-        ps.Play();
+        ParticleSystem DriftPS = rightDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>(); //right wheel particles
+        ParticleSystem.MainModule PSMAIN = DriftPS.main;
+
+        ParticleSystem DriftPS2 = leftDrift.transform.GetChild(i).gameObject.GetComponent<ParticleSystem>(); //left wheel particles
+        ParticleSystem.MainModule PSMAIN2 = DriftPS2.main;
+
+        PSMAIN.startColor = drift1;
+        PSMAIN2.startColor = drift1;
+
+        if (!DriftPS.isPlaying && !DriftPS2.isPlaying)
+        {
+            DriftPS.Play();
+            DriftPS2.Play();
+        }
     }
 
     private void boosts()
