@@ -32,7 +32,7 @@ public class WackyGameManager : NetworkBehaviour
     [SerializeField] private Transform playerPrefab;
 
 
-    private NetworkVariable<State> state = new NetworkVariable<State>(State.WaitingToStart);
+    [SerializeField] private NetworkVariable<State> state = new NetworkVariable<State>(State.WaitingToStart);
     private bool isLocalPlayerReady;
     private NetworkVariable<float> countdownToStartTimer = new NetworkVariable<float>(3f);
     private NetworkVariable<float> gamePlayingTimer = new NetworkVariable<float>(0f);
@@ -303,6 +303,8 @@ public class WackyGameManager : NetworkBehaviour
 
     public void KartPassFinishLine(GameObject kartGameObject)
     {
+        Debug.Log("kartGameObject " + kartsList.IndexOf(kartGameObject));
+        Debug.Log("kartsList[0] " + kartsList[0]);
         if (kartsList.Contains(kartGameObject) && kartsList[0] == kartGameObject)
         {
             lapCounter++;
