@@ -597,8 +597,6 @@ public class KartController_Multiplayer : NetworkBehaviour
         hasPassStart = true;
         hasPassHalf = false;
         lapTimeManager.ResetTime();
-        if (lapCountManager) { 
-            lapCountManager.IncreaseLap();
-        }
+        lapCountManager.IncreaseLap();
     }
 }
