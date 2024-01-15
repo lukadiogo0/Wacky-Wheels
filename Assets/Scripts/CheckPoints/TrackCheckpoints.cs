@@ -19,12 +19,13 @@ public class TrackCheckpoints : MonoBehaviour
 
     public Transform checkpoints;
 
-    public void StartCheckPointManager(List<GameObject> karts)
+    private void Awake()
     {
         Transform checkpointsTransform = transform.Find("Checkpoints");
 
         checkpointSingleList = new List<CheckpointSingle>();
         checkpointSingleTransforms = new List<Transform>();
+
         foreach (Transform checkpointSingleTransform in checkpointsTransform)
         {
             CheckpointSingle checkpointSingle = checkpointSingleTransform.GetComponent<CheckpointSingle>();
@@ -34,6 +35,11 @@ public class TrackCheckpoints : MonoBehaviour
             checkpointSingleTransforms.Add(checkpointSingleTransform);
         }
 
+
+    }
+
+    public void StartCheckPointManager(List<GameObject> karts)
+    {
         nextCheckpointSingleIndexList = new List<int>();
         foreach(GameObject gameObject in karts)
         {
