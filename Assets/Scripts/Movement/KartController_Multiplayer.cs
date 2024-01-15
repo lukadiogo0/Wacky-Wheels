@@ -152,7 +152,7 @@ public class KartController_Multiplayer : NetworkBehaviour
     void FixedUpdate()
     {
         if (!IsOwner) return;
-
+        lapTimeManager.SetCanUpdate(canMove);
         if (canMove) { 
             move();
             sound();
