@@ -11,6 +11,7 @@ public class GameStartCountdownUI : MonoBehaviour {
 
 
     [SerializeField] private TextMeshProUGUI countdownText;
+    [SerializeField] private AudioSource coutdownAudioSource;
 
     private Animator animator;
     private int previousCountdownNumber;
@@ -46,6 +47,7 @@ public class GameStartCountdownUI : MonoBehaviour {
 
     private void Show() {
         gameObject.SetActive(true);
+        coutdownAudioSource.Play();
     }
 
     private void Hide() {
