@@ -43,7 +43,7 @@ public class WackyGameManager : NetworkBehaviour
     private Dictionary<ulong, bool> playerPausedDictionary;
     private bool autoTestGamePausedState;
     [SerializeField] private List<GameObject> kartsList = new List<GameObject>();
-    [SerializeField] private int lapCounter;
+    [SerializeField] private NetworkVariable<int> lapCounter = new NetworkVariable<int>(0, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     private int maxLaps;
     public int currentLevel = 1;
     [SerializeField] private TrackCheckpoints trackCheckpoints;

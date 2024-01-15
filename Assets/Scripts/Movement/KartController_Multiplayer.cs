@@ -79,8 +79,8 @@ public class KartController_Multiplayer : NetworkBehaviour
     public int InicialPosition;
     public int position;
     private bool canMove = false;
-    public bool hasPassHalf;
-    public bool hasPassStart;
+    public NetworkVariable<bool> hasPassHalf = new NetworkVariable<bool>(false, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
+    public NetworkVariable<bool> hasPassStart = new NetworkVariable<bool>(true, NetworkVariableReadPermission.Everyone, NetworkVariableWritePermission.Owner);
     [SerializeField] private LapTimeManager lapTimeManager;
     [SerializeField] private LapCountManager lapCountManager;
 
@@ -593,36 +593,10 @@ public class KartController_Multiplayer : NetworkBehaviour
 
     public void KartPassFinishLine()
     {
-        KartPassFinishLineServerRpc();
-    }
-
-    [ServerRpc]
-    public void KartPassFinishLineServerRpc()
-    {
-        KartPassFinishLineClientRpc(OwnerClientId);
-    }
-
-    [ClientRpc]
-    public void KartPassFinishLineClientRpc(ulong clientid)
-    {
+        if (!IsOwner) return;
         hasPassStart = true;
         hasPassHalf = false;
         lapTimeManager.ResetTime();
         lapCountManager.IncreaseLap();
     }
-
-    [ServerRpc]
-    public void KartPassHalfServerRpc()
-    {
-        KartPassHalfClientRpc(OwnerClientId);
-    }
-
-    [ClientRpc]
-    public void KartPassHalfClientRpc(ulong clientid)
-    {
-        hasPassStart = false;
-        hasPassHalf = true;
-    }
-
-    
 }
