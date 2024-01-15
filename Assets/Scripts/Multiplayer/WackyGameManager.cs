@@ -303,9 +303,7 @@ public class WackyGameManager : NetworkBehaviour
 
     public void KartPassFinishLine(GameObject kartGameObject)
     {
-        Debug.Log("kartGameObject " + kartsList.IndexOf(kartGameObject));
-        Debug.Log("kartsList[0] " + kartsList[0]);
-        if (kartsList.Contains(kartGameObject) && kartsList[0] == kartGameObject)
+        if (GetKartPosition(kartGameObject) + 1 == 1)
         {
             lapCounter++;
         }
