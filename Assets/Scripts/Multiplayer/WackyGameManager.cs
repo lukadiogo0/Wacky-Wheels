@@ -67,7 +67,6 @@ public class WackyGameManager : NetworkBehaviour
                 maxLaps = 1;
                 break;
             case "Level2":
-                Debug.Log("Boas");
                 maxLaps = 1;
                 break;
             case "Level3":
@@ -97,12 +96,11 @@ public class WackyGameManager : NetworkBehaviour
 
     private void SceneManager_OnLoadEventCompleted(string sceneName, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
     {
-        if((SceneManager.GetActiveScene().name == "Level1")) { 
-            foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
-            {
-                Transform playerTransform = Instantiate(playerPrefab);
-                playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
-            }
+        foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
+        {
+            Debug.Log("clientId " + clientId);
+            Transform playerTransform = Instantiate(playerPrefab);
+            playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
         }
     }
 

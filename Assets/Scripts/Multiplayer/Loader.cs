@@ -32,7 +32,7 @@ public class Loader : MonoBehaviour
 
     public static void LoadNetwork(Scene targetScene)
     {
-        NetworkManager.Singleton.SceneManager.LoadScene(targetScene.ToString(), LoadSceneMode.Single);
+        NetworkManager.Singleton.SceneManager.LoadScene(targetScene.ToString(), LoadSceneMode.Additive);
     }
 
     public static void LoaderCallback()
