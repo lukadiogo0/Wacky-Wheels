@@ -32,7 +32,7 @@ public class WackyGameManager : NetworkBehaviour
     [SerializeField] private Transform playerPrefab;
 
 
-    [SerializeField] private NetworkVariable<State> state = new NetworkVariable<State>(State.WaitingToStart);
+    private NetworkVariable<State> state = new NetworkVariable<State>(State.WaitingToStart);
     private bool isLocalPlayerReady;
     private NetworkVariable<float> countdownToStartTimer = new NetworkVariable<float>(3f);
     private NetworkVariable<float> gamePlayingTimer = new NetworkVariable<float>(0f);
@@ -43,7 +43,7 @@ public class WackyGameManager : NetworkBehaviour
     private Dictionary<ulong, bool> playerPausedDictionary;
     private bool autoTestGamePausedState;
     [SerializeField] private List<GameObject> kartsList = new List<GameObject>();
-    private int lapCounter;
+    [SerializeField] private int lapCounter;
     private int maxLaps;
     public int currentLevel = 1;
     [SerializeField] private TrackCheckpoints trackCheckpoints;

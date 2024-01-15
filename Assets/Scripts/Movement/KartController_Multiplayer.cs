@@ -591,14 +591,14 @@ public class KartController_Multiplayer : NetworkBehaviour
         return lapCountManager.GetLap();
     }
 
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     public void KartPassFinishLineServerRpc()
     {
         KartPassFinishLineClientRpc(OwnerClientId);
     }
 
     [ClientRpc]
-    private void KartPassFinishLineClientRpc(ulong clientid)
+    public void KartPassFinishLineClientRpc(ulong clientid)
     {
         hasPassStart = true;
         hasPassHalf = false;
@@ -606,14 +606,14 @@ public class KartController_Multiplayer : NetworkBehaviour
         lapCountManager.IncreaseLap();
     }
 
-    [ServerRpc(RequireOwnership = false)]
+    [ServerRpc]
     public void KartPassHalfServerRpc()
     {
         KartPassHalfClientRpc(OwnerClientId);
     }
 
     [ClientRpc]
-    private void KartPassHalfClientRpc(ulong clientid)
+    public void KartPassHalfClientRpc(ulong clientid)
     {
         hasPassStart = false;
         hasPassHalf = true;
