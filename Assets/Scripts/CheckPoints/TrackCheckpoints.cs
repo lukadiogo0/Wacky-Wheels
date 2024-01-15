@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
-public class TrackCheckpoints : MonoBehaviour
+public class TrackCheckpoints : NetworkBehaviour
 {
 
     public event EventHandler<CarCheckPointEventArgs> OnCarCorrectCheckpoint;
@@ -38,7 +39,14 @@ public class TrackCheckpoints : MonoBehaviour
 
     }
 
-    public void StartCheckPointManager(List<GameObject> karts)
+    [ServerRpc]
+    public void StartCheckPointManagerServerRpc(List<GameObject> karts)
+    {
+        StartCheckPointManagerClientRpc(OwnerClientId, karts);
+    }
+
+    [ClientRpc]
+    public void StartCheckPointManagerClientRpc(ulong clientId, List<GameObject> karts)
     {
         nextCheckpointSingleIndexList = new List<int>();
         carTransformList = new List<Transform>();
