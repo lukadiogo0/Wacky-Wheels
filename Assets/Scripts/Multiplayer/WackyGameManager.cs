@@ -97,10 +97,12 @@ public class WackyGameManager : NetworkBehaviour
 
     private void SceneManager_OnLoadEventCompleted(string sceneName, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode, List<ulong> clientsCompleted, List<ulong> clientsTimedOut)
     {
-        foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
-        {
-            Transform playerTransform = Instantiate(playerPrefab);
-            playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
+        if((SceneManager.GetActiveScene().name == "Level1")) { 
+            foreach (ulong clientId in NetworkManager.Singleton.ConnectedClientsIds)
+            {
+                Transform playerTransform = Instantiate(playerPrefab);
+                playerTransform.GetComponent<NetworkObject>().SpawnAsPlayerObject(clientId, true);
+            }
         }
     }
 
