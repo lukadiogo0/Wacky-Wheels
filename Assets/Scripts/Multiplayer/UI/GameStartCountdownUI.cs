@@ -11,7 +11,6 @@ public class GameStartCountdownUI : MonoBehaviour {
 
 
     [SerializeField] private TextMeshProUGUI countdownText;
-    [SerializeField] private AudioSource coutdownAudioSource;
 
     private Animator animator;
     private int previousCountdownNumber;
