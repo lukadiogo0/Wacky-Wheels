@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class OvertakeManager : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        int overtakerPos = WackyGameManager.Instance.GetKartPosition(other.gameObject);
-        int overtakenPos = WackyGameManager.Instance.GetKartPosition(gameObject.transform.parent.gameObject);
-
-        int overtakerLap = other.gameObject.GetComponent<KartController_Multiplayer>().GetKartLap();
-        int overtakenLap = gameObject.transform.parent.gameObject.GetComponent<KartController_Multiplayer>().GetKartLap();
-
-        if (overtakerPos < overtakenPos && overtakenLap == overtakerLap)
+        if (other.TryGetComponent<KartController_Multiplayer>(out KartController_Multiplayer kart))
         {
-            WackyGameManager.Instance.UpdateKartListPos(other.gameObject, gameObject.transform.parent.gameObject);
+            int overtakerPos = WackyGameManager.Instance.GetKartPosition(kart.gameObject) + 1;
+            int overtakenPos = WackyGameManager.Instance.GetKartPosition(gameObject.transform.parent.gameObject) + 1;
+            Debug.Log("overtakerPos " + overtakerPos);
+            Debug.Log("overtakenPos " + overtakenPos);
+            Debug.Log("kart" + kart.gameObject);
+            int overtakerLap = kart.GetKartLap();
+            int overtakenLap = gameObject.GetComponent<KartController_Multiplayer>().GetKartLap();
+
+            Debug.Log("overtakerLap " + overtakerLap);
+            Debug.Log("overtakenLap " + overtakenLap);
+            if (overtakerPos < overtakenPos && overtakenLap == overtakerLap)
+            {
+                WackyGameManager.Instance.UpdateKartListPos(kart.gameObject, gameObject);
+            }
         }
     }
 }

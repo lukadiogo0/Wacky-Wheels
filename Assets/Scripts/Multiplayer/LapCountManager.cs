@@ -9,7 +9,7 @@ using UnityEngine.UIElements;
 public class LapCountManager : NetworkBehaviour
 {
     [SerializeField] private GameObject LapCounter;
-    private int lapsDone = 0;
+    private int lapsDone = 1;
 
 
     // Update is called once per frame

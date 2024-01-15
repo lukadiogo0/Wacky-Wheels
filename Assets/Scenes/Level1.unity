@@ -38050,17 +38050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0912a57f27e64934d87b12f54540acd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  carTransformList:
-  - {fileID: 1467695040}
-  - {fileID: 741136542}
-  - {fileID: 169958401}
-  - {fileID: 1077213211}
-  - {fileID: 822430485}
-  - {fileID: 434633102}
-  - {fileID: 335225996}
-  - {fileID: 648736087}
-  - {fileID: 202677217}
-  - {fileID: 2118254669}
+  carTransformList: []
   playerCarTransform: {fileID: 1467695040}
   checkpoints: {fileID: 1257276059}
 --- !u!1 &792276136
@@ -51533,9 +51523,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 785902137588024447, guid: 5b733b1f9a6891c4e8b16ccb401d1ea2, type: 3}
-  kartsList: []
-  totalPlayers: 0
   currentLevel: 1
+  trackCheckpoints: {fileID: 790931613}
 --- !u!4 &1083356672 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: e50245e925bce5845b6d0de099362fb7, type: 3}

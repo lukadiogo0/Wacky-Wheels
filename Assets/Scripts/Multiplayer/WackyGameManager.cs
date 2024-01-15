@@ -42,10 +42,11 @@ public class WackyGameManager : NetworkBehaviour
     private Dictionary<ulong, bool> playerReadyDictionary;
     private Dictionary<ulong, bool> playerPausedDictionary;
     private bool autoTestGamePausedState;
-    public List<GameObject> kartsList = new List<GameObject>();
+    private List<GameObject> kartsList = new List<GameObject>();
     private int lapCounter;
     private int maxLaps;
     public int currentLevel = 1;
+    [SerializeField] private TrackCheckpoints trackCheckpoints;
 
     private void Awake()
     {
@@ -188,7 +189,8 @@ public class WackyGameManager : NetworkBehaviour
                 if (countdownToStartTimer.Value < 0f)
                 {
                     state.Value = State.GamePlaying;
-                    foreach(GameObject kart in kartsList)
+                    trackCheckpoints.StartCheckPointManager(kartsList);
+                    foreach (GameObject kart in kartsList)
                     {
                         kart.GetComponent<KartController_Multiplayer>().SetCanMoveServerRpc(true);
                     }
@@ -297,6 +299,7 @@ public class WackyGameManager : NetworkBehaviour
         if (!kartsList.Contains(kartGameObject)) return -1;
         return kartsList.IndexOf(kartGameObject);
     }
+
 
     public int GetTotalKarts()
     {
