@@ -19,7 +19,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8840277345869758244
 Transform:
   m_ObjectHideFlags: 0
@@ -2190,7 +2190,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LapCounter: {fileID: 6284130850984764403}
-  lapsDone: 0
 --- !u!1 &6284130850984764403
 GameObject:
   m_ObjectHideFlags: 0

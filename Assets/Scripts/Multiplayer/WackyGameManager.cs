@@ -189,11 +189,11 @@ public class WackyGameManager : NetworkBehaviour
                 if (countdownToStartTimer.Value < 0f)
                 {
                     state.Value = State.GamePlaying;
-                    trackCheckpoints.StartCheckPointManager(kartsList);
                     foreach (GameObject kart in kartsList)
                     {
                         kart.GetComponent<KartController_Multiplayer>().SetCanMoveServerRpc(true);
                     }
+                    trackCheckpoints.StartCheckPointManager(kartsList);
                 }
 
                 break;

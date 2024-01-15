@@ -10,7 +10,6 @@ public class TrackCheckpoints : MonoBehaviour
     public event EventHandler<CarCheckPointEventArgs> OnCarWrongCheckpoint;
 
     [SerializeField] private List<Transform> carTransformList;
-    [SerializeField] private Transform playerCarTransform;
 
     private List<CheckpointSingle> checkpointSingleList;
     private List<Transform> checkpointSingleTransforms;
