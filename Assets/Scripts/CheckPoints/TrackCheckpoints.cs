@@ -122,9 +122,9 @@ public class TrackCheckpoints : NetworkBehaviour
                 OnCarCorrectCheckpoint.Invoke(this, args);
             }
             Debug.Log("Correct Checkpoint");
-            ComparePositions(carTransform, checkpointSingle);
             nextCheckpointSingleIndexList[carTransformList.IndexOf(carTransform)]
                 = (nextCheckpointSingleIndex + 1) % checkpointSingleList.Count;
+            ComparePositions(carTransform, checkpointSingle);
         }
         else
         {
