@@ -211,6 +211,7 @@ public class WackyGameManager : NetworkBehaviour
                 }
                 break;
             case State.RaceEnd:
+                kartsList = new List<GameObject>();
                 if (currentLevel == 1)
                 {
                     currentLevel = 2;
