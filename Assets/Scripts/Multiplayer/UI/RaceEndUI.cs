@@ -21,12 +21,6 @@ public class RaceEndUI : MonoBehaviour {
                     Loader.Load(Loader.Scene.Level2);
                     break;
                 case "Level2":
-                    Loader.Load(Loader.Scene.Level3);
-                    break;
-                case "Level3":
-                    Loader.Load(Loader.Scene.Level4);
-                    break;
-                case "Level4":
                     NetworkManager.Singleton.Shutdown();
                     Loader.Load(Loader.Scene.MainMenuScene);
                     break;
