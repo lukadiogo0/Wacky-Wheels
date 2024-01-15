@@ -193,7 +193,8 @@ public class WackyGameManager : NetworkBehaviour
                     {
                         kart.GetComponent<KartController_Multiplayer>().SetCanMoveServerRpc(true);
                     }
-                    trackCheckpoints.StartCheckPointManagerServerRpc(kartsList);
+                    trackCheckpoints.StartCheckPointManager(kartsList);
+                    //trackCheckpoints.StartCheckPointManagerServerRpc(kartsList);
                 }
 
                 break;

@@ -39,14 +39,29 @@ public class TrackCheckpoints : NetworkBehaviour
 
     }
 
-    [ServerRpc]
-    public void StartCheckPointManagerServerRpc(List<GameObject> karts)
+    public void StartCheckPointManager(List<GameObject> karts)
     {
-        StartCheckPointManagerClientRpc(OwnerClientId, karts);
+        nextCheckpointSingleIndexList = new List<int>();
+        carTransformList = new List<Transform>();
+        foreach (GameObject gameObject in karts)
+        {
+            carTransformList.Add(gameObject.transform);
+        }
+
+        foreach (Transform carTransform in carTransformList)
+        {
+            nextCheckpointSingleIndexList.Add(0);
+        }
     }
 
-    [ClientRpc]
-    public void StartCheckPointManagerClientRpc(ulong clientId, List<GameObject> karts)
+    [ServerRpc]
+    public void StartCheckPointManagerServerRpc()
+    {
+        //StartCheckPointManagerClientRpc(OwnerClientId,);
+    }
+
+    //[ClientRpc]
+    /*public void StartCheckPointManagerClientRpc(ulong clientId, List<GameObject> karts)
     {
         nextCheckpointSingleIndexList = new List<int>();
         carTransformList = new List<Transform>();
@@ -59,7 +74,7 @@ public class TrackCheckpoints : NetworkBehaviour
         {
             nextCheckpointSingleIndexList.Add(0);
         }
-    }
+    }*/
 
     /*private void Update()
     {
