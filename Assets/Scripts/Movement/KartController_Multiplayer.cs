@@ -600,10 +600,24 @@ public class KartController_Multiplayer : NetworkBehaviour
     [ClientRpc]
     private void KartPassFinishLineClientRpc(ulong clientid)
     {
-        if (!IsOwner) return;
         hasPassStart = true;
         hasPassHalf = false;
         lapTimeManager.ResetTime();
         lapCountManager.IncreaseLap();
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void KartPassHalfServerRpc()
+    {
+        KartPassHalfClientRpc(OwnerClientId);
+    }
+
+    [ClientRpc]
+    private void KartPassHalfClientRpc(ulong clientid)
+    {
+        hasPassStart = false;
+        hasPassHalf = true;
+    }
+
+    
 }

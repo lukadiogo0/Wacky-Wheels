@@ -8,8 +8,7 @@ public class CheckpointHalfLap : MonoBehaviour
     {
         if (other.TryGetComponent<KartController_Multiplayer>(out KartController_Multiplayer kart)){
             if (kart.hasPassStart) {
-                kart.hasPassStart = false;
-                kart.hasPassHalf = true;
+                kart.KartPassHalfServerRpc();
             }
         }
     }
