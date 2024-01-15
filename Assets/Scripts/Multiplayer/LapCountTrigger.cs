@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-public class LapCountTrigger : NetworkBehaviour
+public class LapCountTrigger : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
@@ -11,7 +11,7 @@ public class LapCountTrigger : NetworkBehaviour
         {
             if (kart.hasPassHalf) { 
                 WackyGameManager.Instance.KartPassFinishLine(other.gameObject);
-                kart.KartPassFinishLineServerRpc();
+                kart.KartPassFinishLine();
             }
         }
     }

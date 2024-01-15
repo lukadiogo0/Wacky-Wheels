@@ -591,6 +591,11 @@ public class KartController_Multiplayer : NetworkBehaviour
         return lapCountManager.GetLap();
     }
 
+    public void KartPassFinishLine()
+    {
+        KartPassFinishLineServerRpc();
+    }
+
     [ServerRpc]
     public void KartPassFinishLineServerRpc()
     {
