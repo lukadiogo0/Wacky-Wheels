@@ -179,7 +179,6 @@ public class WackyGameManager : NetworkBehaviour
         switch (state.Value)
         {
             case State.WaitingToStart:
-                state.Value = State.CountdownToStart;
                 break;
             case State.CountdownToStart:
                 countdownToStartTimer.Value -= Time.deltaTime;

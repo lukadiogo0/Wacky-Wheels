@@ -52,7 +52,6 @@ public class RaceEndUI : MonoBehaviour {
 
     private void WackyGameManager_OnStateChanged(object sender, System.EventArgs e) {
         if (WackyGameManager.Instance.IsRaceEnd()) {
-            raceEndText.text = "Escrever a posicao aqui";
             Show();
         } else {
             Hide();
