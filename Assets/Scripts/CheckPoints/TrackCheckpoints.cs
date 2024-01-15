@@ -111,7 +111,6 @@ public class TrackCheckpoints : NetworkBehaviour
 
     public void CarThroughCheckpoint(CheckpointSingle checkpointSingle, Transform carTransform)
     {
-        Debug.Log(carTransform);
         int nextCheckpointSingleIndex = nextCheckpointSingleIndexList[carTransformList.IndexOf(carTransform)];
         if (checkpointSingleList.IndexOf(checkpointSingle) == nextCheckpointSingleIndex)
         {
@@ -123,6 +122,7 @@ public class TrackCheckpoints : NetworkBehaviour
                 OnCarCorrectCheckpoint.Invoke(this, args);
             }
             Debug.Log("Correct Checkpoint");
+            ComparePositions(carTransform, checkpointSingle);
             nextCheckpointSingleIndexList[carTransformList.IndexOf(carTransform)]
                 = (nextCheckpointSingleIndex + 1) % checkpointSingleList.Count;
         }
@@ -134,6 +134,37 @@ public class TrackCheckpoints : NetworkBehaviour
             {
                 CarCheckPointEventArgs args = new CarCheckPointEventArgs(carTransform);
                 OnCarWrongCheckpoint.Invoke(this, args);
+            }
+        }
+    }
+
+    private void ComparePositions(Transform carTransform, CheckpointSingle checkpointSingle)
+    {
+        int carPositon = WackyGameManager.Instance.GetKartPosition(carTransform.gameObject) + 1;
+        Debug.Log("carPositon "+ carPositon);
+
+        if(carPositon > 1)
+        {
+            GameObject carInFront = null;
+            int carInFrontCheckpoint = 0;
+
+            for(int i = 0; i < carTransformList.Count; i++)
+            {
+                Debug.Log(WackyGameManager.Instance.GetKartPosition(carTransformList[i].gameObject) + 1);
+                if (WackyGameManager.Instance.GetKartPosition(carTransformList[i].gameObject) + 1 == carPositon - 1)
+                {
+                    carInFront = carTransformList[i].gameObject;
+                    carInFrontCheckpoint = nextCheckpointSingleIndexList[carTransformList.IndexOf(carTransformList[i])];
+                    break;
+                }
+            }
+            Debug.Log("carInFront "+carInFront);
+            Debug.Log("checkpointSingleList.IndexOf(checkpointSingle) " + checkpointSingleList.IndexOf(checkpointSingle));
+            Debug.Log("carInFrontCheckpoint " + carInFrontCheckpoint);
+            
+            if(checkpointSingleList.IndexOf(checkpointSingle) > carInFrontCheckpoint)
+            {
+                WackyGameManager.Instance.UpdateKartListPos(carTransform.gameObject, carInFront);
             }
         }
     }
