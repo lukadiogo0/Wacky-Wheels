@@ -349,9 +349,9 @@ MonoBehaviour:
   SyncPositionX: 1
   SyncPositionY: 1
   SyncPositionZ: 1
-  SyncRotAngleX: 0
+  SyncRotAngleX: 1
   SyncRotAngleY: 1
-  SyncRotAngleZ: 0
+  SyncRotAngleZ: 1
   SyncScaleX: 0
   SyncScaleY: 0
   SyncScaleZ: 0
@@ -1845,10 +1845,10 @@ RectTransform:
   m_Father: {fileID: 119749804326214365}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 700, y: 341.3}
-  m_SizeDelta: {x: 418.7478, y: 226.3361}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -260, y: -145}
+  m_SizeDelta: {x: 418.7478, y: 226.33612}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &5281589542069072974
 GameObject:

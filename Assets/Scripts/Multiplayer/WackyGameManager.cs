@@ -67,6 +67,7 @@ public class WackyGameManager : NetworkBehaviour
                 maxLaps = 1;
                 break;
             case "Level2":
+                Debug.Log("Boas");
                 maxLaps = 1;
                 break;
             case "Level3":
@@ -213,19 +214,19 @@ public class WackyGameManager : NetworkBehaviour
                 if (currentLevel == 1)
                 {
                     currentLevel = 2;
-                    Loader.Load(Loader.Scene.Level2);
+                    Loader.LoadNetwork(Loader.Scene.Level2);
                     break;
                 }
                 else if(currentLevel == 2)
                 {
                     currentLevel = 3;
-                    Loader.Load(Loader.Scene.Level3);
+                    Loader.LoadNetwork(Loader.Scene.Level3);
                     break;
                 }
                 else if(currentLevel == 3)
                 {
                     currentLevel = 4;
-                    Loader.Load(Loader.Scene.Level4);
+                    Loader.LoadNetwork(Loader.Scene.Level4);
                     break;
                 }
              break;

@@ -141,7 +141,6 @@ public class TrackCheckpoints : NetworkBehaviour
     private void ComparePositions(Transform carTransform, CheckpointSingle checkpointSingle)
     {
         int carPositon = WackyGameManager.Instance.GetKartPosition(carTransform.gameObject) + 1;
-        Debug.Log("carPositon "+ carPositon);
 
         if(carPositon > 1)
         {
@@ -150,7 +149,6 @@ public class TrackCheckpoints : NetworkBehaviour
 
             for(int i = 0; i < carTransformList.Count; i++)
             {
-                Debug.Log(WackyGameManager.Instance.GetKartPosition(carTransformList[i].gameObject) + 1);
                 if (WackyGameManager.Instance.GetKartPosition(carTransformList[i].gameObject) + 1 == carPositon - 1)
                 {
                     carInFront = carTransformList[i].gameObject;
@@ -158,11 +156,8 @@ public class TrackCheckpoints : NetworkBehaviour
                     break;
                 }
             }
-            Debug.Log("carInFront "+carInFront);
-            Debug.Log("carInFrontCheckpoint " + carInFrontCheckpoint);
-            int nextCheckpointSingleIndex = nextCheckpointSingleIndexList[carTransformList.IndexOf(carTransform)];
-            Debug.Log("nextCheckpointSingleIndex " + nextCheckpointSingleIndex);
 
+            int nextCheckpointSingleIndex = nextCheckpointSingleIndexList[carTransformList.IndexOf(carTransform)];
             if (nextCheckpointSingleIndex > carInFrontCheckpoint)
             {
                 WackyGameManager.Instance.UpdateKartListPos(carTransform.gameObject, carInFront);
