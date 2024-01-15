@@ -11,7 +11,7 @@ public class LapCountTrigger : MonoBehaviour
         {
             if (kart.hasPassHalf) { 
                 WackyGameManager.Instance.KartPassFinishLine(other.gameObject);
-                kart.KartPassFinishLine();
+                kart.KartPassFinishLineServerRpc();
             }
         }
     }

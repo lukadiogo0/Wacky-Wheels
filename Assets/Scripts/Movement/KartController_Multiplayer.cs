@@ -591,7 +591,14 @@ public class KartController_Multiplayer : NetworkBehaviour
         return lapCountManager.GetLap();
     }
 
-    public void KartPassFinishLine()
+    [ServerRpc(RequireOwnership = false)]
+    public void KartPassFinishLineServerRpc()
+    {
+        KartPassFinishLineClientRpc(OwnerClientId);
+    }
+
+    [ClientRpc]
+    private void KartPassFinishLineClientRpc(ulong clientid)
     {
         if (!IsOwner) return;
         hasPassStart = true;
